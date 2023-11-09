@@ -29,6 +29,8 @@ const config: Config = {
     locales: ['en'],
   },
 
+  plugins: ['@docusaurus/theme-live-codeblock'],
+
   presets: [
     [
       'classic',
@@ -52,7 +54,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: null,
+    image: undefined,
     navbar: {
       title: 'TypeScript-ohjelmointi',
       // logo: {
@@ -119,6 +121,13 @@ const config: Config = {
         },
       ],
       copyright: `This website was built with Docusaurus.`,
+    },
+    liveCodeBlock: {
+      /**
+       * The position of the live playground, above or under the editor
+       * Possible values: "top" | "bottom"
+       */
+      playgroundPosition: 'bottom',
     },
     prism: {
       theme: prismThemes.github,
