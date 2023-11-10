@@ -10,32 +10,32 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: 'Miksi TypeScript?',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        TypeScript-kieli on käänteentekevä ratkaisu JavaScript-kielisten ohjelmistojen kehittäjäkokemuksen, ylläpidettävyyden ja kehitystyökalujen saralla.
+        Kieli on saavuttanut lyhyessä ajassa suuren käyttäjäkunnan ja sen osaajille on merkittävästi kysyntää.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Oppimistavat',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Tämä opintojakso toteutetaan virtuaalisesti itseopiskeluun nojautuen. Oppiminen toteutetaan sekä teorian että harjoitustehtävien avulla.
+        Ohjaajat ja muut opiskelijat ovat kurssin aikana tavoitettavissa MS Teams -palvelun kautta.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Osaamistavoitteet',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Kurssin käytyäsi osaat hyödyntää TypeScript-ohjelmointikielen tyyppijärjestelmää. Osaat hyödyntää sekä kielen 
+        valmiita tyyppejä että luoda omia. Opit myös yhdistelemään ja tekemään erilaisia variaatioita tyypeistä.
       </>
     ),
   },

@@ -1,47 +1,49 @@
 ---
 sidebar_position: 1
+sidebar_label: 'Tervetuloa!'
 ---
 
-# Tutorial Intro
 
-Let's discover **Docusaurus in less than 5 minutes**.
+# TypeScript-ohjelmointi
 
-## Getting Started
+TypeScript-kieli on käänteentekevä ratkaisu JavaScript-kielisten ohjelmistojen kehittäjäkokemuksen, ylläpidettävyyden ja kehitystyökalujen saralla. Kieli on saavuttanut lyhyessä ajassa suuren käyttäjäkunnan ja sen osaajille on merkittävästi kysyntää. Tule mukaan kurssille tutustumaan TypeScript-kieleen ja sen tyyppijärjestelmään!
 
-Get started by **creating a new site**.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Osaamistavoitteet
 
-### What you'll need
+Kurssin käytyäsi osaat hyödyntää TypeScript-ohjelmointikielen tyyppijärjestelmää. Osaat hyödyntää sekä kielen valmiita tyyppejä että luoda omia. Opit myös yhdistelemään ja tekemään erilaisia variaatioita tyypeistä.
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+## Sisältö
 
-## Generate a new site
+Opintojaksolla perehdytään TypeScript-kielen perusideaan, työkaluihin ja tyyppeihin.
 
-Generate a new Docusaurus site using the **classic template**.
+Aihealueita ovat esimerkiksi seuraavat:
 
-The classic template will automatically be added to your project after you run the command:
+* Perustietotyypit
+* Keyof ja typeof -operaattorit
+* Geneeriset tyypit
+* Tyyppien unionit ja leikkaukset
+* "Mäpätyt" tyypit
+* Tyyppivahdit (type guard)
+* Aputyypit (pick, omit, partial)
 
-```bash
-npm init docusaurus@latest my-website classic
-```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+## Oppimistavat
 
-## Start your site
+Opintojakso toteutetaan virtuaalisesti itseopiskeluun nojautuen. Oppiminen toteutetaan sekä teorian että harjoitustehtävien avulla.
 
-Run the development server:
 
-```bash
-cd my-website
-npm run start
-```
+## Oppimateriaalit
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+Kurssilla hyödynnetään netistä löytyviä lähteitä niin TypeScriptin virallisista lähteistä kuin myös kolmansien osapuolten lähteistä.
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+## Lähtötaso ja sidonnaisuudet muihin opintojaksoihin
+
+Kurssin lähtökohtana oletamme, että olio-ohjelmoinnin perusteet ja käsitteistä ovat jo ennestään tuttuja esimerkiksi Java-, Python-, C#- tai JavaScript-kielestä.
+
+
+## Arviointikriteerit
+
+Opintojakso arvioidaan asteikolla hylätty / hyväksytty. Hyväksytty suoritus edellyttää osallistujalta osaamisen osoittamista kurssin tehtävien parissa.

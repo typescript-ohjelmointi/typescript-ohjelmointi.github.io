@@ -6,9 +6,11 @@ const config: Config = {
   title: 'TypeScript-ohjelmointi',
   tagline: '',
   favicon: 'img/favicon.ico',
-
+  trailingSlash: true,
+  deploymentBranch: 'gh-pages',
+  
   // Set the production url of your site here
-  url: 'https://typescript-ohjelmointi.github.io',
+  url: 'https://typescript-ohjelmointi.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -40,11 +42,7 @@ const config: Config = {
           editUrl:
             'https://github.com/typescript-ohjelmointi/typescript-ohjelmointi.github.io/tree/main/',
         },
-        blog: {
-          showReadingTime: true,
-          editUrl:
-            'https://github.com/typescript-ohjelmointi/typescript-ohjelmointi.github.io/tree/main/',
-        },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -68,7 +66,6 @@ const config: Config = {
           position: 'left',
           label: 'Materiaalit',
         },
-        { to: '/blog', label: 'Kurssi', position: 'left' },
         {
           href: 'https://github.com/typescript-ohjelmointi/',
           label: 'GitHub',
