@@ -1,9 +1,8 @@
 ---
 sidebar_position: 2
-sidebar_label: 'Getting started'
 ---
 
-# Gettings started
+# Getting started
 
 ## TypeScript for the New Programmer
 
