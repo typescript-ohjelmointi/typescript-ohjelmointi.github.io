@@ -6,7 +6,7 @@ sidebar_label: 'Tervetuloa!'
 
 # TypeScript-ohjelmointi
 
-TypeScript-kieli on käänteentekevä ratkaisu JavaScript-kielisten ohjelmistojen kehittäjäkokemuksen, ylläpidettävyyden ja kehitystyökalujen saralla. Kieli on saavuttanut lyhyessä ajassa suuren käyttäjäkunnan ja sen osaajille on merkittävästi kysyntää. Tule mukaan kurssille tutustumaan TypeScript-kieleen ja sen tyyppijärjestelmään!
+TypeScript-kieli on käänteentekevä ratkaisu JavaScript-kielisten ohjelmistojen kehittäjäkokemuksen, ylläpidettävyyden ja kehitystyökalujen saralla. Kieli on saavuttanut lyhyessä ajassa suuren käyttäjäkunnan ja sen osaajille on merkittävästi kysyntää. Tervetuloa mukaan kurssille tutustumaan TypeScript-kieleen ja sen tyyppijärjestelmään!
 
 
 ## Osaamistavoitteet

@@ -4,11 +4,11 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'TypeScript-ohjelmointi',
-  tagline: '',
+  tagline: 'Tervetuloa tutustumaan TypeScript-kieleen ja sen tyyppijärjestelmään!',
   favicon: 'img/favicon.ico',
   trailingSlash: true,
   deploymentBranch: 'gh-pages',
-  
+
   // Set the production url of your site here
   url: 'https://typescript-ohjelmointi.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
