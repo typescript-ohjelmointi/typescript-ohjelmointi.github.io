@@ -1,41 +1,26 @@
-# Website
+# TypeScript-ohjelmointi
+
+This repository contains the source code for [typescript-ohjelmointi.github.io](https://typescript-ohjelmointi.github.io).
+
+## How to update the website
+
+```
+# install dependencies and tools
+$ npm install
+
+# start local server for previewing
+$ npm start
+
+# or, if you need to access the site from outside:
+$ npm start --host 0.0.0.0
+
+# build the whole site into static assets
+$ npm build
+
+# deploy to GitHub pages
+$ GIT_USER=USERNAME npm run deploy
+```
+
+## Docusaurus
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
-
-### Installation
-
-```
-$ yarn
-```
-
-### Local Development
-
-```
-$ yarn start
-```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-### Build
-
-```
-$ yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-### Deployment
-
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
