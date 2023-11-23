@@ -77,7 +77,7 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Oppimateriaalia',
           items: [
             {
               label: 'TypeScript documentation',
@@ -91,7 +91,7 @@ const config: Config = {
         },
 
         {
-          title: 'Community',
+          title: 'TypeScript',
           items: [
             {
               label: 'typescriptlang.org',
@@ -108,11 +108,15 @@ const config: Config = {
           ],
         },
         {
-          title: 'More',
+          title: 'Kurssi',
           items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: 'Opinto-opas',
+              href: 'https://opinto-opas.haaga-helia.fi/',
+            },
+            {
+              label: '@typescript-ohjelmointi (GitHub)',
+              href: 'https://github.com/typescript-ohjelmointi',
             },
           ],
         },

@@ -12,7 +12,7 @@ $ npm install
 $ npm start
 
 # or, if you need to access the site from outside:
-$ npm start --host 0.0.0.0
+$ npm start -- --host 0.0.0.0
 
 # build the whole site into static assets
 $ npm build
