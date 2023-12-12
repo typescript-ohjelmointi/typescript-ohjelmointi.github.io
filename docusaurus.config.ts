@@ -80,11 +80,11 @@ const config: Config = {
           title: 'Oppimateriaalia',
           items: [
             {
-              label: 'TypeScript documentation',
+              label: 'TypeScriptin dokumentaatio',
               to: 'https://www.typescriptlang.org/docs/',
             },
             {
-              label: 'TypeScript at YouTube',
+              label: 'TypeScript YouTubessa',
               to: 'https://www.youtube.com/results?search_query=typescript',
             },
           ],
@@ -98,11 +98,11 @@ const config: Config = {
               href: 'https://www.typescriptlang.org/',
             },
             {
-              label: 'TypeScript at Stack Overflow',
+              label: 'Stack Overflow (tagi: TypeScript)',
               href: 'https://stackoverflow.com/questions/tagged/typescript',
             },
             {
-              label: 'TypeScript at GitHub',
+              label: 'TypeScriptin lähdekoodit',
               href: 'https://github.com/microsoft/TypeScript',
             },
           ],
@@ -111,17 +111,17 @@ const config: Config = {
           title: 'Kurssi',
           items: [
             {
-              label: 'Opinto-opas',
-              href: 'https://opinto-opas.haaga-helia.fi/',
+              label: 'Opintojaksokuvaus',
+              href: 'https://opinto-opas.haaga-helia.fi/course_unit/SOF014AS3A',
             },
             {
-              label: '@typescript-ohjelmointi (GitHub)',
+              label: 'Kurssin GitHub-sivut',
               href: 'https://github.com/typescript-ohjelmointi',
             },
           ],
         },
       ],
-      copyright: `This website was built with Docusaurus.`,
+      copyright: `Tämä sivusto on rakennettu Docusaurus-työkalulla`,
     },
     liveCodeBlock: {
       /**

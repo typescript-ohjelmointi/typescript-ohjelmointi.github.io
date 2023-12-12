@@ -21,6 +21,11 @@ $ npm build
 $ GIT_USER=USERNAME npm run deploy
 ```
 
+## Credits
+
+The front page pictures [robo-study.png](./static/img/robo-study.png), [robo-study2.png](./static/img/robo-study2.png), [ts-js.png](./static/img/ts-js.png) and [ts-learning-goals.png](./static/img/ts-learning-goals.png) were generated using DALL-E 3.
+
+
 ## Docusaurus
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
