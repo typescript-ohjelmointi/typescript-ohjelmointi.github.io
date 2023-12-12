@@ -64,6 +64,9 @@ error TS2345: Argument of type 'number[]' is not assignable to parameter of type
 
 TypeScript-kääntäjä `tsc` havaitsi siis yllä virheen, jossa `Math.max`-metodille annettiin numeron sijasta numerotaulukko. Käytännössä tulet kirjoittamaan TypeScript-koodia editorilla, joka tarkastaa koodia jo sitä kirjoitettaessa. Editorisi siis varoittaa todennäköisesti virheistä jo ennen kuin ehdit itse kääntää koodiasi.
 
+
+#### Optional types
+
 Jos katsot tarkemmin edellä esitettyä `demo.ts`-esimerkkikoodia, huomaat, että siinä ei itseasiassa ole määritetty lainkaan tyyppejä, vaikka TypeScriptiä juuri väitettiin staattisesti tyypitetyksi kieleksi 🤔. Tyyppien määritteleminen itse ei olekaan monessa tapauksessa tarpeen, koska TypeScript osaa päätellä arvojen tyypit esimerkiksi sijoitusperaatioiden ja `return`-lauseiden perusteella. Tyyppien päättelemisestä käytetään tarkemmin termiä [**Type Inference**](https://www.typescriptlang.org/docs/handbook/type-inference.html).
 
 Koska `numbers`-muuttujaan asetetaan taulukko, joka sisältää vain numeroita, päättelee TypeScript sen tyyliksi numerotaulukon eli `number[]`. Numerotaulukko saadaan puolestaan purettua erillisiksi parameteriksi [JavaScriptin **spread**-operaattorilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax), eli `Math.max(...numbers)`. Pidemmin kirjoitettuna koodi saadaan siis toimimaan seuraavasti:
