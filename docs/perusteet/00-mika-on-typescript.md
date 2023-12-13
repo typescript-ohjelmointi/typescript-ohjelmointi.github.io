@@ -45,7 +45,7 @@ Virheellisiin metodikutsuihin ja tyyppeihin liittyvät ongelmat voidaan tyypilli
 
 **Staattista tyypitystä** hyödynnettäessä ohjelman muuttujille, parametreille ja paluuarvoille määritellään etukäteen tyypit, joita hyödynnetään käännösvaiheessa ohjelmakoodin oikeellisuuden tarkastamiseksi.
 
-**TypeScript on JavaScript-kielen laajennos**, eli edellinen JS-koodiesimerkki voidaan kirjoittaa täsmälleen samalla tavalla TypeScript-kielellä:
+**TypeScript on JavaScript-kielen laajennos**, joten edellinen JS-koodiesimerkki voidaan kirjoittaa täsmälleen samalla tavalla TypeScript-kielellä:
 
 ```ts title="demo.ts"
 let numbers = [42, 0, -1, 100];
@@ -67,7 +67,9 @@ error TS2345: Argument of type 'number[]' is not assignable to parameter of type
 ```
 :::
 
-[TypeScript-kääntäjä, eli `tsc`](https://www.typescriptlang.org/docs/handbook/compiler-options.html), havaitsi yllä virheen, jossa `Math.max`-metodille annettiin numeron sijasta numerotaulukko. Käytännössä tulet kirjoittamaan TypeScript-koodia editorilla, joka tarkastaa koodia jo sitä kirjoitettaessa. Editorisi siis varoittaa todennäköisesti virheistä jo ennen kuin ehdit itse kääntää koodiasi.
+[TypeScript-kääntäjä, eli `tsc`](https://www.typescriptlang.org/docs/handbook/compiler-options.html), havaitsi yllä virheen, jossa `Math.max`-metodille annettiin numeron sijasta numerotaulukko. Metodille olisikin pitänyt antaa erillisiä numeroita, esimerkiksi. `Math.max(42, 0, -1, 100)`, eikä taulukkoa `Math.max(numbers)`.
+
+Käytännössä tulet kirjoittamaan TypeScript-koodia editorilla, joka tarkastaa koodia jo sitä kirjoitettaessa. Editorisi siis varoittaa todennäköisesti virheistä jo ennen kuin ehdit itse kääntää koodiasi.
 
 
 #### Optional types
@@ -105,7 +107,13 @@ Käytännössä JavaScript-koodin suoritusympäristöön vaikuttaa monta tekijä
 
 ## TypeScript compiles to JavaScript
 
-Kääntäjän tuottama JavaScript-koodi on "puhdasta" JavaScriptiä, eikä siinä ole merkkejä TypeScriptistä. Jos palaamme vielä ylempänä esitettyyn esimerkkiin, se voidaan kääntää asetuksista riippuen erilaisiin muotoihin.
+Kääntäjän tuottama JavaScript-koodi on "puhdasta" JavaScriptiä, eikä siinä ole merkkejä TypeScriptistä.
+
+> *"Roughly speaking, once TypeScript’s compiler is done with checking your code, it erases the types to produce the resulting "compiled" code. This means that once your code is compiled, the resulting plain JS code has no type information."*
+>
+> Microsoft. TypeScript for the New Programmer. [typescriptlang.org](https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html)
+
+Jos palaamme vielä ylempänä esitettyyn esimerkkiin, se voidaan kääntää asetuksista riippuen erilaisiin muotoihin.
 
 ```ts title="demo.ts"
 let numbers: number[] = [42, 0, -1, 100];
