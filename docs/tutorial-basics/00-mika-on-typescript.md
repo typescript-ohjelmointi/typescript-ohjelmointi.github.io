@@ -11,11 +11,14 @@ TypeScriptin omilla sivuilla kerrotaan, että "TypeScript is JavaScript with syn
 >
 > Microsoft. [TypeScript at GitHub.com](https://github.com/microsoft/TypeScript)
 
-TypeScriptiä voidaankin luonnehtia seuraavien edellä mainittujen ominaisuuksien kautta:
+TypeScriptiä luonnehditaankin seuraavissa kappaleissa edellä mainittujen ominaisuuksien kautta.
+
 
 ## JavaScript with syntax for types
 
-TypeScript tuo dynaamisesti tyypitettyyn JavaScriptiin tuen staattisille tyyppimäärityksille.
+Eri ohjelmointikielissä on erilaisia lähestymistapoja arvojen tyyppien käsittelemiseksi. **JavaScript**-kielessä kaikilla arvoilla on olemassa jokin tyyppi, kuten numero, merkkijono, objekti tai taulukko. Tyypitys on kuitenkin **dynaamista**, eli muuttujiin voidaan asettaa vapaasti eri tyyppisiä arvoja ja funktiot voivat vastaanottaa ja niistä voidaan palauttaa eri tyyppisiä arvoja. Koska muuttujien, parametrien ja paluuarvojen tyypit riippuvat suoritusaikaisesta datasta, tyyppejä käsitellään ja mahdollisesti tarkastetaan ajonaikaisesti ohjelmaa suoritettaessa.
+
+**TypeScript** tuo dynaamisesti tyypitettyyn JavaScriptiin tuen **staattisille tyyppimäärityksille**.
 
 
 ### Dynaaminen tyypitys
@@ -31,16 +34,18 @@ let largest = Math.max(numbers);
 console.log({ largest });   // mitä tämä rivi tulostaa?
 ```
 
-Yllä oleva koodiesimerkki tulostaa hieman yllättäen `{ largest: NaN }`, eli suurimmaksi arvoksi palautettiin [`NaN` (not a number)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN). Tämä johtuu siitä, että [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max#syntax) odottaa saavansa joukon arvoja erillisinä parametreina, *eikä taulukkona*.
+Yllä oleva koodiesimerkki tulostaa hieman yllättäen `{ largest: NaN }`. Tämä johtuu siitä, että [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max#syntax) odottaa saavansa joukon arvoja erillisinä parametreina, *eikä taulukkona*. Paluuarvo on tavallaan perusteltu, koska annettu arvo ei ole numero.
 
-Tämänkaltaiset virheet voidaan tyypillisesti havaita jo koodia kirjoitettaessa, mikäli funktioioden parametrit sekä muuttujat tyypitetään staattisesti.
+Tämänkaltaiset bugit voivat olla yllättävän työläitä selvittää, koska metodi ei aiheuttanut poikkeusta tai "kaatanut" ohjelmaa, vaan se vain antoi paluuarvoksi ei-toivotun arvon. Tämä bugi ilmenisikin todennäköisesti ohjelmassa vasta myöhemmässä vaiheessa, kun metodin palauttamaa arvoa käytetään laskuoperaatiossa tai tulosteessa.
+
+Virheellisiin metodikutsuihin ja tyyppeihin liittyvät ongelmat voidaan tyypillisesti havaita ja korjata jo koodia kirjoitettaessa, mikäli funktioioden parametrit sekä muuttujat tyypitetään staattisesti.
 
 
 ### Staattinen tyypitys
 
 **Staattista tyypitystä** hyödynnettäessä ohjelman muuttujille, parametreille ja paluuarvoille määritellään etukäteen tyypit, joita hyödynnetään käännösvaiheessa ohjelmakoodin oikeellisuuden tarkastamiseksi.
 
-Edellinen koodiesimerkki voidaankin kirjoittaa täsmälleen samalla tavalla TypeScript-kielellä:
+**TypeScript on JavaScript-kielen laajennos**, eli edellinen JS-koodiesimerkki voidaan kirjoittaa täsmälleen samalla tavalla TypeScript-kielellä:
 
 ```ts title="demo.ts"
 let numbers = [42, 0, -1, 100];
@@ -49,7 +54,7 @@ let largest = Math.max(numbers);  // käännösvirhe
 console.log({ largest });
 ```
 
-Kun TypeScript-kielistä koodiesimerkkiä käännetään, havaitaan virhe jo käännösvaiheessa:
+Kun tätä TypeScript-koodiesimerkkiä käännetään, havaitaan virhe jo käännösvaiheessa:
 
 :::danger käännösvirhe
 Käännetään koodinpätkä `npx tsc demo.ts`-komennolla:
@@ -62,7 +67,7 @@ error TS2345: Argument of type 'number[]' is not assignable to parameter of type
 ```
 :::
 
-TypeScript-kääntäjä `tsc` havaitsi siis yllä virheen, jossa `Math.max`-metodille annettiin numeron sijasta numerotaulukko. Käytännössä tulet kirjoittamaan TypeScript-koodia editorilla, joka tarkastaa koodia jo sitä kirjoitettaessa. Editorisi siis varoittaa todennäköisesti virheistä jo ennen kuin ehdit itse kääntää koodiasi.
+[TypeScript-kääntäjä, eli `tsc`](https://www.typescriptlang.org/docs/handbook/compiler-options.html), havaitsi yllä virheen, jossa `Math.max`-metodille annettiin numeron sijasta numerotaulukko. Käytännössä tulet kirjoittamaan TypeScript-koodia editorilla, joka tarkastaa koodia jo sitä kirjoitettaessa. Editorisi siis varoittaa todennäköisesti virheistä jo ennen kuin ehdit itse kääntää koodiasi.
 
 
 #### Optional types
@@ -84,7 +89,6 @@ console.log({ largest });   // tulostaa { largest: 100 }
 ```
 
 
-
 ## Application-scale JavaScript
 
 TypeScriptin [käsikirjassa](https://www.typescriptlang.org/docs/handbook/intro.html#about-this-handbook) todetaan osuvasti, että JavaScriptin käyttö on viime vuosikymmeninä laajentunut pienistä verkkosivuille kehitettävistä interaktiivisista elementeistä [miljoonien koodirivien kokoisiksi ohjelmiksi](https://stripe.com/blog/migrating-to-typescript). Samalla JavaScript-kielen kyky tukea suurempia projekteja sekä niissä esiityviä monimutkaisia sisäisiä suhteita ei ole kehittynyt.
@@ -96,11 +100,40 @@ Pienemmissä ohjelmistoprojekteissa TypeScriptin käyttöönotto voi tuntua turh
 
 TypeScript-kääntäjä kääntää TypeScript-kielisen lähdekoodin standardin mukaiseksi JavaScript-koodiksi, jota voidaan suorittaa missä vain JavaScript-suoritusympäristössä, esimerkiksi selaimessa tai Node.js:llä. TypeScript tukee myös eri [ECMAScript-versioita](https://ecma-international.org/publications-and-standards/standards/ecma-262/), joten voit halutessasi kääntää nykyaikaista syntaksia hyödyntävän koodisi myös vanhempien selainten tukemaan muotoon.
 
-Käytännössä JavaScript-koodin suoritusympäristöön vaikuttaa monta tekijää. Esimerkiksi selaimessa on käytössä [WHATWG](https://html.spec.whatwg.org/multipage/)-spesifikaation mukaiset ominaisuudet kuten "dom". Vastaavasti Node.js-ympäristössä on [oma standardikirjastonsa](https://nodejs.org/api/modules.html).
-
-TypeScript-kääntäjän toimintaa konfiguroidaan [`tsconfig.json`-tiedoston](https://www.typescriptlang.org/tsconfig) avulla, ja käännetyn koodin suoritusympäristö voidaan asettaa [target](https://www.typescriptlang.org/tsconfig#target)- sekä [lib](https://www.typescriptlang.org/tsconfig#lib)-arvojen avulla vastaamaan oman sovelluksen käyttötapauksia.
+Käytännössä JavaScript-koodin suoritusympäristöön vaikuttaa monta tekijää. Esimerkiksi selaimessa on käytössä [WHATWG](https://html.spec.whatwg.org/multipage/)-spesifikaation mukaiset ominaisuudet kuten "dom". Vastaavasti Node.js-ympäristössä on [oma standardikirjastonsa](https://nodejs.org/api/modules.html). TypeScript osaa ottaa nämä huomioon ja tarkastaa tyypit, kunhan ECMAScript-versio määritellään [target](https://www.typescriptlang.org/tsconfig#target)-asetuksella ja kirjastot [lib](https://www.typescriptlang.org/tsconfig#lib)-asetuksella. Asetukset voidaan tallentaa projektin [`tsconfig.json`-tiedostoon](https://www.typescriptlang.org/tsconfig).
 
 
 ## TypeScript compiles to JavaScript
 
-Kääntäjän tuottama JavaScript-koodi on "puhdasta" JavaScriptiä, eikä siinä ole merkkejä TypeScriptistä.
+Kääntäjän tuottama JavaScript-koodi on "puhdasta" JavaScriptiä, eikä siinä ole merkkejä TypeScriptistä. Jos palaamme vielä ylempänä esitettyyn esimerkkiin, se voidaan kääntää asetuksista riippuen erilaisiin muotoihin.
+
+```ts title="demo.ts"
+let numbers: number[] = [42, 0, -1, 100];
+let largest: number = Math.max(...numbers);
+
+console.log({ largest });
+```
+
+Yllä oleva koodi näyttää käännettynä ES2022-standardin mukaiseksi JavaScriptiksi seuraavalta:
+
+```js title="compiledES2022.js"
+let numbers = [42, 0, -1, 100];
+let largest = Math.max(...numbers);
+
+console.log({ largest });
+```
+
+Koska ES2022 tukee käytännössä kaikkia koodissa esiintyviä ominaisuuksia, ei käännetty koodi eroa juurikaan alkuperäisestä. Vain siinä esiintyvät tyypit on poistettu.
+
+Mikäli koodia on tarkoitus suorittaa vanhemmilla selaimilla, jotka eivät esimerkiksi tue koodissa käytettyjä ["spread"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)- ja ["object property shorthand"](https://javascript.plainenglish.io/object-literals-using-object-property-shorthand-6360825c60ef)-syntakseja, voidaan se kääntää esimerkiksi ES3:n tukemaan muotoon:
+
+```js title="compiledES3.js"
+var numbers = [42, 0, -1, 100];
+var largest = Math.max.apply(Math, numbers);
+
+console.log({ largest: largest });
+```
+
+Tässä viimeisessä versiossa muuttujat on määritetty aikaisemmista esimerkeistä poiketen vanhemmalla `var`-avainsanalla ja `Math.max`-metodin kutsu sekä `{ largest: largest }` on esitetty pidemmässä muodossa.
+
+Voit kokeilla itse kääntää tätä koodia eri asetuksilla [TypeScript playground -palvelussa](https://www.typescriptlang.org/play?target=9#code/DYUwLgBAdgrgtgIxAJwM4C5rycg2gXQgF4JcAWAJgBoIAGGgWgEYanbb8BuAKFEmACGyAOYhUYTLEQpiEALICwACwB0cAQA8AFCt1ScqAJQ9uAYwD2UVOdArg54VoDeEQSLGQAvse5A).
