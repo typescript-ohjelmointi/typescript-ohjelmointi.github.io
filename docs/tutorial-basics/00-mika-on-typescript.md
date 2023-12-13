@@ -20,9 +20,9 @@ TypeScript tuo dynaamisesti tyypitettyyn JavaScriptiin tuen staattisille tyyppim
 
 ### Dynaaminen tyypitys
 
-Eri ohjelmointikielissä on erilaisia lähestymistapoja arvojen tyyppien käsittelemiseksi. JavaScript-kielessä kaikilla arvoilla on olemassa jokin tyyppi, kuten numero, merkkijono, objekti tai taulukko. Tyypitys on kuitenkin **dynaamista**, eli muuttujiin voidaan asettaa vapaasti eri tyyppisiä arvoja ja funktiot voivat vastaanottaa ja niistä voidaan palauttaa eri tyyppisiä arvoja. Koska muuttujien, parametrien ja paluuarvojen tyypit riippuvat suoritusaikaisesta datasta, tyyppejä käsitellään ja mahdollisesti tarkastetaan ajonaikaisesti ohjelmaa suoritettaessa.
+Eri ohjelmointikielissä on erilaisia lähestymistapoja arvojen tyyppien käsittelemiseksi. JavaScript-kielessä kaikilla arvoilla on olemassa jokin tyyppi, kuten `number`, `string`, `object` tai `array`. Tyypitys on kuitenkin **dynaamista**, eli muuttujiin voidaan asettaa vapaasti eri tyyppisiä arvoja ja funktiot voivat vastaanottaa ja niistä voidaan palauttaa eri tyyppisiä arvoja. Koska muuttujien, parametrien ja paluuarvojen tyypit riippuvat suoritusaikaisesta datasta, tyyppejä käsitellään vain ajonaikaisesti ohjelmaa suoritettaessa.
 
-Katsotaan esimerkiksi seuraavaa JavaScript-kielistä esimerkkikoodia, jossa etsitään numeerisen taulukon suurinta arvoa [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max#syntax)-funktion avulla. Mitä seuraava koodi tulostaa?
+Dynaamisen tyypityksen heikkous, johon TypeScript pyrkii vastaamaan, on tyyppien tarkastaminen jo ennen koodin suorittamista. Katsotaan esimerkiksi seuraavaa JavaScript-kielistä esimerkkikoodia, jossa etsitään numeroita sisältävän taulukon suurinta arvoa [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max#syntax)-metodin avulla. Mitä seuraava koodi tulostaa?
 
 ```js title="demo.js"
 let numbers = [42, 0, -1, 100, 9];
@@ -31,7 +31,7 @@ let largest = Math.max(numbers);
 console.log({ largest });   // mitä tämä rivi tulostaa?
 ```
 
-Yllä oleva koodiesimerkki tulostaa hieman yllättäen `{ largest: NaN }`. Tämä johtuu siitä, että [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max#syntax) odottaa saavansa joukon arvoja erillisinä parametreina, *eikä taulukkona*.
+Yllä oleva koodiesimerkki tulostaa hieman yllättäen `{ largest: NaN }`, eli suurimmaksi arvoksi palautettiin [`NaN` (not a number)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN). Tämä johtuu siitä, että [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max#syntax) odottaa saavansa joukon arvoja erillisinä parametreina, *eikä taulukkona*.
 
 Tämänkaltaiset virheet voidaan tyypillisesti havaita jo koodia kirjoitettaessa, mikäli funktioioden parametrit sekä muuttujat tyypitetään staattisesti.
 
@@ -69,7 +69,12 @@ TypeScript-kääntäjä `tsc` havaitsi siis yllä virheen, jossa `Math.max`-meto
 
 Jos katsot tarkemmin edellä esitettyä `demo.ts`-esimerkkikoodia, huomaat, että siinä ei itseasiassa ole määritetty lainkaan tyyppejä, vaikka TypeScriptiä juuri väitettiin staattisesti tyypitetyksi kieleksi 🤔. Tyyppien määritteleminen itse ei olekaan monessa tapauksessa tarpeen, koska TypeScript osaa päätellä arvojen tyypit esimerkiksi sijoitusperaatioiden ja `return`-lauseiden perusteella. Tyyppien päättelemisestä käytetään tarkemmin termiä [**Type Inference**](https://www.typescriptlang.org/docs/handbook/type-inference.html).
 
-Koska `numbers`-muuttujaan asetetaan taulukko, joka sisältää vain numeroita, päättelee TypeScript sen tyyliksi numerotaulukon eli `number[]`. Numerotaulukko saadaan puolestaan purettua erillisiksi parameteriksi [JavaScriptin **spread**-operaattorilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax), eli `Math.max(...numbers)`. Pidemmin kirjoitettuna koodi saadaan siis toimimaan seuraavasti:
+Koska `numbers`-muuttujaan asetetaan taulukko, joka sisältää vain numeroita, päättelee TypeScript sen tyyliksi numerotaulukon eli `number[]`. TypeScriptin päättelemät tyypit näkyvät mm. ylempänä virheilmoituksessa *"'number[]' is not assignable to parameter of type 'number'"*.
+
+
+#### Bugin korjaus
+
+`Math.max`-metodille täytyy antaa parametrina taulukon sijasta erilliset numerot. Tämä saadaan ratkaistua siten, että numerotaulukko `number[]` puretaan erillisiksi arvoiksi [JavaScriptin **spread**-operaattorilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax). Metodin kutsusta tulee siis `Math.max(...numbers)`. Pidemmin kirjoitettuna ja tyyppimääritysten kera koodi saadaan siis korjattua seuraavasti:
 
 ```ts title="demo.ts"
 let numbers: number[] = [42, 0, -1, 100];
