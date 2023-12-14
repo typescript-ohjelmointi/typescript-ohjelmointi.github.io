@@ -194,3 +194,9 @@ Minimalistinen mutta toimiva asetustiedosto voi näyttää esimerkiksi tältä:
     }
 }
 ```
+
+## Tehtävät
+
+Perehdyttyäsi materiaaliin ja asennettuasi ohjelmointiin tarvittavat työkalut, olet valmis ensimmäisiin tehtäviin! [Löydät TypeScriptin perusteisiin liittyvät tehtävät omalta sivultaan](../tehtavat/01-perusteet.md).
+
+Tehtävien jälkeen etene TypeScriptin tyyppijärjestelmän pariin.

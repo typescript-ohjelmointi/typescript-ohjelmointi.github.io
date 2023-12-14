@@ -2,6 +2,7 @@
   "label": "Tyyppijärjestelmä",
   "position": 3,
   "link": {
+    "description": "Tässä luvussa perehdyt TypeScriptin valmiisiin tyyppeihin sekä siihen, miten voit määritellä omia tyyppejä ohjelmiisi.",
     "type": "generated-index"
   }
 }
