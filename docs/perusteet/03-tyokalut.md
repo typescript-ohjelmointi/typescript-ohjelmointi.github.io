@@ -5,32 +5,53 @@ sidebar_label: Työkalut
 
 # Työkalut
 
-## Videosuositukset
+Koska TypeScript ja JavaScript ovat monilta osin sama asia, monet JS-koodin kehittämiseksi käytettävät työkalut soveltuvat myös TypeScriptin kehitykseen. TypeScript-koodia kehitettäessä kaksi tärkeintä työkalua ovat TypeScript-kääntäjä eli **tsc**, sekä TypeScript-kieltä tukeva koodieditori.
 
-[TypeScript Tooling in 5 minutes (typescriptlang.org)](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html)
+Kurssin puolesta suosittelemme editoriksi [Visual Studio Code:a (VS Code)](https://code.visualstudio.com/). VS Code sisältää valmiiksi tuen TypeScript-kielelle ja itseasiassa se [on myös itse toteutettu TypeScript-kielellä](https://github.com/Microsoft/vscode/).
 
-## TypeScriptin asentaminen
+Vaikka käyttäisit koodin editoimisessa VS Code:a, tarvitset silti erikseen TypeScript-kääntäjän. Kääntäjä asennetaan [Node.js](https://nodejs.org/en)-ajoympäristön [npm-pakettienhallinnan (Node Package Manager)](https://www.npmjs.com/) avulla. Npm asentuu Node.js:n mukana. Mikäli sinulla ei ole vielä Node.js-ympäristöä asennettuna, voit asentaa sen [Node.js:n asennusohjeiden mukaisesti](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs).
 
-TypeScript voidaan asentaa joko globaalisti koko käyttöjärjestelmään tai paikallisesti yksittäiseen projektiin. Globaali asennus [jakaa mielipiteitä](https://github.com/loopbackio/loopback.io/issues/509) ja tämän kurssin esimerkeissä asennus tehdään aina paikallisesti. Paikallisen asennuksen etuina koko projekti riippuvuuksineen asentuu kerralla yhdellä komennolla (`npm install`) ja kaikilla kehittäjillä on käytössään sama versio TypeScriptistä. Paikallisen asennuksen haittapuolena joudut kirjoittamaan `tsc`-komennon sijasta `npx tsc` ([npx -- execute npm package binaries](https://www.npmjs.com/package/npx)).
+:::info Online-editorit
 
-> *"TypeScript is available as a package on the npm registry available as "typescript". You will need a copy of Node.js as an environment to run the package. Then you use a dependency manager like npm, yarn or pnpm to download TypeScript into your project."*
+Kurssin puitteissa sinun ei ole aivan välttämätöntä asentaa kaikkia työkaluja omalle koneellesi. Vaihtoehtoisesti voit hyödyntää online-palveluita, kuten [TypeScript playground](https://www.typescriptlang.org/play). Myös ilmaiset selainpohjaiset koodieditorit, kuten [GitHub codespaces](https://github.com/features/codespaces), [CodePen](https://codepen.io/) tai [StackBlitz](https://stackblitz.com/) voivat soveltua kurssin suorittamiseen. Näihin palveluihin voidaan kuitenkin kurssin puolesta tarjota vain hyvin rajallista tukea.
+
+:::
+
+Tarkempaa tietoa työkaluista löydät tiiviissä muodossa TypeScriptin käsikirjasta luvusta [TypeScript Tooling in 5 minutes (typescriptlang.org)](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html). Myös Node.js:n dokumentaation artikkeli [Node.js with TypeScript (nodejs.org)](https://nodejs.org/en/learn/getting-started/nodejs-with-typescript) sisältää hyvän johdannon TypeScript-kehityksen työkaluihin ja työvaiheisiin.
+
+
+## Paikallinen tai globaali asennus
+
+TypeScript voidaan asentaa joko **globaalisti** koko käyttöjärjestelmään tai **paikallisesti** yksittäiseen projektiin. Globaali ja paikallinen asennus jakavat mielipiteitä[<sup>1</sup>](https://github.com/loopbackio/loopback.io/issues/509) ja jopa TypeScriptin omat ohjeet vaihtelevat asennustavan suhteen. [Käsikirjan ohjeessa asennus tehdään globaalisti](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html) kun taas [download-sivulla asennus tehdään paikallisesti](https://www.typescriptlang.org/download).
+
+Download-sivulla paikallista eli projektikohtaista asennusta perustellaan seuraavasti:
+
+> *"Having TypeScript set up on a per-project basis lets you have many projects with many different versions of TypeScript, this keeps each project working consistently."*
+>
+> Microsoft. [Download TypeScript](https://www.typescriptlang.org/download)
+
+Mikäli et työskentele samanaikaisesti lukuisten eri TypeScript-projektien parissa tai tee yhteistyötä muiden kehittäjien kanssa, ei asennustavalla ole suurta merkitystä. Tämän kurssin esimerkeissä asennus tehdään paikallisesti. Paikallisen asennuksen etuina koko projekti riippuvuuksineen asentuu kerralla yhdellä `npm install` -komennolla  ja kaikilla kehittäjillä on käytössään sama versio TypeScriptistä. Paikallisen asennuksen haittapuolena joudut kirjoittamaan `tsc`-komennon sijasta `npx tsc` tai `npm exec tsc` ([docs.npmjs.com](https://docs.npmjs.com/cli/v8/commands/npx)).
+
+
+## Asennuskomennot
+
+Asenna TypeScript itsellesi uuteen projektiin luomalla tyhjä hakemisto, siirtymällä siihen komentorivillä, ja suorittamalla komento `npm install typescript --save-dev`.
+
+> *"TypeScript is available as a [package on the npm registry](https://www.npmjs.com/package/typescript) available as "typescript". You will need a copy of Node.js as an environment to run the package. Then you use a dependency manager like npm, yarn or pnpm to download TypeScript into your project."*
 >
 > ```
 > npm install typescript --save-dev
 > ```
 >
-> *"You can then run the TypeScript compiler using one of the following commands:*"
->
-> ```
-> $ npm exec tsc
-> $ npx tsc
-> $ yarn tsc
-> $ pnpm tsc
-> ```
->
 > https://www.typescriptlang.org/download
 
-Asennuksen jälkeen `package.json`-tiedostosi näyttää esim. seuraavalta:
+Asennuksen jälkeen voit suorittaa `tsc`-kääntäjän seuraavasti:
+
+```
+$ npx tsc
+```
+
+Asennus luo hakemistoosi `node_modules`-alihakemiston, sekä `package.json`-tiedoston, jossa on määritettynä projektissa käytettävä TypeScript-versio. Tiedosto voi näyttää aluksi tältä, ja siihen voidaan lisätä myöhemmin projektin muut riippuvuudet:
 
 ```json
 {
@@ -40,75 +61,84 @@ Asennuksen jälkeen `package.json`-tiedostosi näyttää esim. seuraavalta:
 }
 ```
 
-Kuten yltä huomaat, TypeScript asennetaan development-vaiheen riippuvuudeksi. TypeScriptiä ei tarvita varsinaisessa tuotantoympäristössä lainkaan, koska koodi käännetään ensin JavaScriptiksi, jota suoritetaan sellaisenaan esimerkiksi selaimessa tai Node.js-ympäristössä.
+:::info Development dependency
+
+Kuten yltä huomaat, TypeScript asennetaan **development**-riippuvuudeksi ([devDependencies](https://docs.npmjs.com/specifying-dependencies-and-devdependencies-in-a-package-json-file)). Koska TypeScript-koodi käännetään JavaScriptiksi, TypeScriptiä ei tosiaan tarvita varsinaisessa tuotantoympäristössä, eli esimerkiksi selaimessa tai palvelimella.
+:::
 
 
-## Kääntäminen eli transpilointi
+## Kääntäminen ja transpilointi
 
-TypeScriptin omissa dokumenteissa käytetään pääsääntöisesti termiä "kääntäminen" (compiling), kun puhutaan TS-koodin muuntamisesta JS-koodiksi. Kääntämiselle tarkoitetaan kuitenkin perinteisesti operaatiota, jossa ihmisen luettava lähdekoodi muunnetaan matalamman abstraktiotason muotoon, joka on tyypillisesti konekielistä ja ihmisen vaikeasti luettavaa. TS-koodi käännetään kuitenkin saman abstraktiotason JavaScript-koodiksi, joten monissa lähteissä tästä käytetään termiä "transpilointi" (transpiling). [(StackOverflow: Compiling vs Transpiling)](https://stackoverflow.com/a/44932758)
+TypeScriptin omissa dokumenteissa käytetään pääsääntöisesti termiä **"kääntäminen"** (compiling), kun puhutaan TS-koodin muuntamisesta JS-koodiksi. Käytämme myös tämän kurssin materiaalissa samaa termiä.
 
-TypeScript-koodin transpilointia tai kääntämistä voidaan kokeilla kätevästi sivulla [TypeScript Playground](https://www.typescriptlang.org/play).
+Kääntämiselle tarkoitetaan perinteisesti operaatiota, jossa ihmisen luettava lähdekoodi muunnetaan matalamman abstraktiotason muotoon, joka on tyypillisesti konekielistä ja siten ihmisen vaikeasti luettavaa. TS-koodi käännetään kuitenkin "saman abstraktiotason" JavaScript-koodiksi, joten joissain lähteissä samasta asiasta käytetään termiä **"transpilointi"** (transpiling). [(StackOverflow: Compiling vs Transpiling)](https://stackoverflow.com/a/44932758)
 
-Lue lisää TypeScriptin työkaluista artikkelista [Tooling in 5 minutes](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html).
+TypeScript-koodin kääntämistä voidaan kokeilla kätevästi sivulla [TypeScript Playground](https://www.typescriptlang.org/play).
 
-Transpilointi mahdollistaa viimeisintä syntaksia hyödyntävän TypeScript-koodin muuntamisen yhteensopivaksi myös vanhojen JS-versioiden kanssa. [Kokeile esimerkiksi transpiloida TS-koodia, jossa esiintyy moderneja ominaisuuksia kuten `async` tai `await`](https://www.typescriptlang.org/play?target=0#code/MYewdgzgLgBA5gUygVQggThGBeGBDCATzGBgAoBKHAPhgG0BvGASwBMAuGARgBoYw8AWwScA5AEEANs2AJRMAL4BdANxA).
+Kääntäjä osaa huomioida eri ECMAScript-versioita, eli sillä pystytään tuottamaan myös vanhempien JavaScript-suoritusympäristöjen ymmärtämää koodia modernista TypeScript-koodista. Esimerkiksi alla oleva TypeScript-koodi sisältää ominaisuuksia, joita erityisesti vanhemmissa selaimissa ei ole, mutta kääntäjä osaa muuntaa rakenteet [jopa ES5:n ymmärtämään muotoon](https://www.typescriptlang.org/play?target=1#code/MYGwhgzhAEAKCmAnCB7AdtA3gWAFDQOmHQgBdEBXYUlRACkXjABN0QBPaAMwEtlSAcmAC28AFzQyiHmgDmAGmiMWbTuDJDREqTNkBKLHkLQAvniOFZ8UtwogQm+HQM58xwo1IVEGAAYASTFIACx4IADpefkcTaECQsPD1QRF4E18AbgsCM1xcvBBraAAHaABeaDR4AHc4JFQ0OgByACkUYLQmxSaAERR4Jr0s3GI0VEKklFk6Ysi7B1ShoA):
 
+```ts
+class Person {
+    constructor(readonly firstName: string, readonly lastName: string) {
+    }
 
-## TypeScript-työkalut
-
-Koska TypeScript ja JavaScript ovat osittain sama asia, monet JS-koodin kehittämiseksi käytettävät työkalut soveltuvat myös TS-koodin kehitykseen. Esimerkiksi VS Code sekä Node.js ja npm toimivat hyvin yhteen TypeScript-projektien kanssa.
-
-
-### Npx
-
-Jos et asentanut [TypeScript-pakettia](https://www.npmjs.com/package/typescript) globaalisti, täytyy se suorittaa paikallisen projektin `node_modules`-hakemistosta. Tämä onnistuu joko komennolla `npm exec tsc` tai lyhyemmin `npx`-komennon avulla:
-
-> *"\[npx\] command allows you to run an arbitrary command from an npm package (either one installed locally, or fetched remotely), in a similar context as running it via `npm run`.*"
->
-> https://docs.npmjs.com/cli/v9/commands/npx
-
-```bash
-$ npx tsc   # suorittaa `tsc`-komennon, eikä edellytä globaalia asennusta
+    get fullName() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+}
 ```
 
-`npx`-komennon pitäisi löytyä sinulta valmiiksi, jos sinulla on `npm` asennettuna.
+Voit itse kääntää koodin eri JavaScript-versioiden tukemaan muotoon [TypeScript playground -palvelussa](https://www.typescriptlang.org/play?target=1#code/MYGwhgzhAEAKCmAnCB7AdtA3gWAFDQOmHQgBdEBXYUlRACkXjABN0QBPaAMwEtlSAcmAC28AFzQyiHmgDmAGmiMWbTuDJDREqTNkBKLHkLQAvniOFZ8UtwogQm+HQM58xwo1IVEGAAYASTFIACx4IADpefkcTaECQsPD1QRF4E18AbgsCM1xcvBBraAAHaABeaDR4AHc4JFQ0OgByACkUYLQmxSaAERR4Jr0s3GI0VEKklFk6Ysi7B1ShoA).
 
 
-### Ts-node
+## Yleisimmät komennot
+
+TypeScript-koodia kirjoittaessasi tarvitset `tsc`-komentoa, eli TypeScript-kääntäjää. Kääntäjää käytetään pääasiassa komentoriviltä käsin, joten [komentorivin peruskäytön](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Command_line) on hyvä olla tuttua. Peruskäyttöön riittää tässä yhteydessä hakemistojen välillä siirtyminen sekä komentojen suorittaminen.
+
+
+### Tsc
+
+Jos haluat kääntää kirjoittamasi TypeScript-kielisen ohjelman lähdekoodit JavaScript-kielisiksi lähdekoodeiksi, onnistuu se `tsc`-komennolla (TypeScript compiler). Yksittäinen `.ts`-päätteinen lähdekooditiedosto saadaan käännettyä JavaScript-koodiksi seuraavalla komennolla:
+
+```
+tsc helloWorld.ts       # TypeScript asennettu globaalisti
+npx tsc helloWorld.ts   # TypeScript asennettu paikallisesti
+```
+
+`tsc`-komento kääntää kirjoittamasi TypeScript-tiedostot JavaScript-tiedostoiksi. Kääntäjälle voidaan antaa useita eri komentoriviparametreja, jotka vaikuttavat kääntämisen lopputulokseen. Näistä löydät lisätietoa [TypeScriptin käsikirjasta](https://www.typescriptlang.org/docs/handbook/compiler-options.html).
+
+Käännetyt JavaScript-tiedostot voidaan suorittaa selaimessa tai komentorivillä aivan kuten mitkä tahansa `.js`-tiedostot. Käännetyn tiedoston suorittaminen komentorivillä `node`-komennolla onnistuu esimerkiksi seuraavasti:
+
+```
+node helloWorld.js
+```
+
+:::info tsconfig.json
+Usein projektit koostuvat lukuisista tiedostoista, jotka sijaitsevat tarkoituksenmukaisen hakemistorakenteen sisällä. Projektit myös usein haluavat vaikuttaa siihen, millä asetuksilla kääntäminen tehdään. Tämän vuoksi projekteihin toteutetaan usein `tsconfig.json`-niminen tiedosto, johon voidaan määritellä käytettävä hakemistorakenne sekä kääntämisen asetukset.
+:::
+
+### Kääntämisen automatisointi
+
+Lähdekoodin kääntäminen ja suorittaminen kahdessa eri vaiheessa voi pidemmän päälle tuntua kömpelöltä. Työkalut osaavat kuitenkin onneksi huolehtia kääntämisestä automaattisesti taustalla. `tsc`-kääntäjä voidaan käynnistää siten, että se [kääntää tiedostot taustalla niiden muuttuessa](https://www.typescriptlang.org/docs/handbook/compiler-options.html). Vaihtoehtoisesti voit käynnistää Node.js-ohjelman suoraan TypeScript-muotoisesta tiedostosta [**ts-node**-työkalulla](https://www.npmjs.com/package/ts-node), joka kääntää koodia sen suorituksen aikana:
 
 > *"`ts-node` is a TypeScript execution engine and REPL for Node.js. It JIT transforms TypeScript into JavaScript, enabling you to directly execute TypeScript on Node.js without precompiling. "*
 >
 > https://www.npmjs.com/package/ts-node
 
-`ts-node` mahdollistaa TypeScript-koodin suorittamisen ilman etukäteen tehtävää käännösvaihetta:
+`ts-node` mahdollistaa siis TypeScript-koodin suorittamisen ilman etukäteen tehtävää käännösvaihetta:
 
 ```bash
-$ npm install ts-node --save-dev    # asentaa ts-noden paikallisesti
+npm install ts-node --save-dev    # asentaa ts-noden paikallisesti
 
-$ npx ts-node src/skripti.ts        # suorittaa skriptin `src/skripti.ts`
+npx ts-node src/skripti.ts        # suorittaa skriptin `src/skripti.ts`
 
-$ npx ts-node                       # käynnistää ts-noden REPL-tilan
-```
-
-### Tsc
-
-Jos haluat kääntää kirjoittamasi TypeScript-kielisen ohjelman lähdekoodit JavaScript-kielisiksi lähdekoodeiksi, onnistuu se `tsc`-komennolla (TypeScript compiler):
-
-```
-$ npx tsc                   # kaikki .ts-tiedostot (edellyttää tsconfig-tiedostoa)
-$ npx tsc helloWorld.ts     # yksi .ts-tiedosto
-```
-
-`tsc`-komento kääntää kirjoittamasi TypeScript-tiedostot JavaScript-tiedostoiksi, jotka voidaan suorittaa Node.js:llä tai selaimessa aivan kuten mitkä tahansa `.js`-tiedostot:
-
-```
-$ node helloWorld.js
+npx ts-node                       # käynnistää ts-noden REPL-tilan
 ```
 
 
-### Tsconfig.json
+## Tsconfig.json
 
-TypeScript-kääntäjä sekä työkalut, kuten `ts-node`, tukevat lukuisia TS-koodin kääntämiseen liittyviä asetuksia. Nämä asetukset voidaan antaa komentoriviparametreina, mutta tyypillisesti niitä on niin paljon, että ne kannattaa tallentaa erilliseen asetustiedostoon.
+TypeScript-kääntäjä sekä työkalut, kuten `ts-node` ja `ts-jest`, tukevat lukuisia TS-koodin kääntämiseen liittyviä asetuksia. Nämä asetukset voidaan antaa komentoriviparametreina, mutta tyypillisesti niitä on niin paljon, että ne kannattaa tallentaa erilliseen asetustiedostoon.
 
 > *"The presence of a tsconfig.json file in a directory indicates that the directory is the root of a TypeScript project. The tsconfig.json file specifies the root files and the compiler options required to compile the project"*
 >
@@ -117,8 +147,9 @@ TypeScript-kääntäjä sekä työkalut, kuten `ts-node`, tukevat lukuisia TS-ko
 `tsconfig.json`-asetustiedostoon voidaan määritellä lukuisia kääntäjän toimintaan vaikuttavia asetuksia. Voit luoda itsellesi uuden `tsconfig.json`-tiedoston `tsc`-komennon avulla:
 
 ```bash
-$ npx tsc --init
-
+npx tsc --init
+```
+```
 Created a new tsconfig.json with:
 
   target: es2016
@@ -132,7 +163,7 @@ Created a new tsconfig.json with:
 You can learn more at https://aka.ms/tsconfig
 ```
 
-Monet tiedoston asetukset liittyvät kääntäjän tekemiin tarkastuksiin, kuten siihen, sallitaanko funktion parametreissa tai paluuarvoissa puuttuvia tietotyyppejä. Kääntäjän tekemät tarkastukset ja varoitukset ovat  lähtökohtaisesti hyödyllisiä, joten suosittelemme hyödyntämään niitä laajasti. `strict`-asetuksella saadaankin asetettua kerralla monet erilliset asetukset päälle:
+Monet tiedoston asetukset liittyvät kääntäjän tekemiin tarkastuksiin, kuten siihen, sallitaanko koodissa funktion parametreissa tai paluuarvoissa puuttuvia tietotyyppejä. Kääntäjän tekemät tarkastukset ja varoitukset ovat  lähtökohtaisesti hyödyllisiä, joten suosittelemme hyödyntämään niitä laajasti. `strict`-asetuksella saadaankin asetettua kerralla monet erilliset asetukset päälle:
 
 > *"The strict flag enables a wide range of type checking behavior that results in stronger guarantees of program correctness. Turning this on is equivalent to enabling all of the strict mode family options, which are outlined below. You can then turn off individual strict mode family checks as needed."*
 >
