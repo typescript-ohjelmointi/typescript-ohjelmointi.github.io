@@ -17,13 +17,13 @@ Kurssin käytyäsi osaat hyödyntää TypeScript-ohjelmointikielen tyyppijärjes
 
 Opintojaksolla perehdytään TypeScript-kielen perusideaan, työkaluihin ja tyyppeihin.
 
-Aihealueita ovat esimerkiksi seuraavat:
+Aihealueita ovat seuraavat:
 
 * Perustietotyypit
 * Keyof ja typeof -operaattorit
 * Geneeriset tyypit
 * Tyyppien unionit ja leikkaukset
-* "Mäpätyt" tyypit
+* Map-tyypit (mapped types)
 * Tyyppivahdit (type guard)
 * Aputyypit (pick, omit, partial)
 

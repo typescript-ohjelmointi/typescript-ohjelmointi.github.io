@@ -71,8 +71,15 @@ function printId(id: number | string) {
 Uusia tyyppejä voidaan myös yhdistellä olemassa olevista tyypeistä *intersection* -operaatiolla. Seuraavassa esimerkissä on määritetty tyypit `Coordinate` ja `Address`, sekä `MapMarker`, joka sisältää molempien edellä mainittujen tyyppien attribuutit:
 
 ```ts
-type Coordinate = { lat: number, lon: number };
-type Address = { street: string, city: string };
+type Coordinate = {
+    lat: number;
+    lon: number;
+};
+
+type Address = {
+    street: string;
+    city: string;
+};
 
 type MapMarker = Address & Coordinate;
 
@@ -88,10 +95,10 @@ Eri tyyppien yhdistäminen voi olla kätevää esimerkiksi tapauksissa, joissa k
 
 ```ts
 type Entity = {
-    id: number,
-    createdAt: Date,
-    updatedAt: Date,
-    deletedAt?: Date    // undefined if not marked as deleted
+    id: number;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt?: Date;
 };
 
 type Author = Entity & { name: string };
@@ -99,58 +106,17 @@ type Book = Entity & { title: string, author: Author };
 ```
 
 
-### "Record" ja avain-arvo-pareja sisältävät oliot
+### Tuplet (monikko)
 
-JavaScriptissä olioita (object) käytetään usein avain-arvo-pareja sisältävänä map-tietorakenteena. Tämä poikkeaa edellä esitellyistä esimerkeistä siten, että avainten nimet eivät ole ennalta tiedossa, vaikka sekä avainten että arvojen tyypit tiedetäänkin. TypeScript mahdollistaa ns. [index signaturen](https://basarat.gitbook.io/typescript/type-system/index-signatures#declaring-an-index-signature), jolla voidaan määritellä objektin avainten sekä arvojen tyypit:
-
-```ts
-let emojis: { [key: string]: string } = {};
-emojis['smile'] = '🙂';
-emojis['laugh'] = '😄';
-
-
-// objektin kaikki avaimet saadaan array:na JS:n Object.keys-metodilla:
-console.log(Object.keys(emojis));   // [ 'smile', 'laugh' ]
-
-// objektin kaikki arvot saadaan array:na JS:n Object.values-metodilla:
-console.log(Object.values(emojis)); // [ '🙂', '😄' ]
-
-
-// TypeScript ei takaa, että avaimelle löytyy arvoa:
-console.log(emojis['angry']);       // undefined
-
-// avain voidaan tarkastaa `in`-operaatiolla:
-if ('smile' in emojis) {
-    console.log(emojis['smile']);   // 🙂
-}
-
-console.table(emojis); /* ┌─────────┬────────┐
-                          │ (index) │ Values │
-                          ├─────────┼────────┤
-                          │  smile  │  '🙂'  │
-                          │  laugh  │  '😄'  │
-                          └─────────┴────────┘ */
-
-```
-
-TypeScriptin "utility types" -tyypeistä löytyy myös valmis `Record`, jonka avulla objektin avainten ja arvojen tyypit on määritettävissä vielä astetta selkeämmin:
-
-> **Record&lt;Keys, Type&gt;**
->
-> *"Constructs an object type whose property keys are Keys and whose property values are Type. This utility can be used to map the properties of a type to another type."*
->
-> https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type
+TS tukee JavaScriptin taulukoille myös erityistä [tuple-tyyppiä](https://www.typescriptlang.org/docs/handbook/2/objects.html#tuple-types), jossa voidaan ennalta määritellä taulukon pituus ja kunkin eri indeksin tyyppi:
 
 ```ts
-let weekdays: Record<string, string> = {};
-weekdays['monday'] = 'maanantai';
-weekdays['tuesday'] = 'tiistai';
+type NameAndAge = [string, number];
 
-console.log(weekdays);                  // { monday: 'maanantai', tuesday: 'tiistai' }
-console.log('tuesday' in weekdays);     // true
-
-console.log(weekdays['someday']);       // undefined
+let alice: NameAndAge = ['Alice', 29];  // ok!
+let bob: NameAndAge = ['Bob', 28, 1];   // käännösvirhe! `Source has 3 element(s) but target allows only 2`
 ```
+
 
 ### Muita kiinnostavia ominaisuuksia
 

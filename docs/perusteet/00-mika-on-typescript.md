@@ -23,9 +23,15 @@ Eri ohjelmointikielissä on erilaisia lähestymistapoja arvojen tyyppien käsitt
 
 ### Dynaaminen tyypitys
 
-Eri ohjelmointikielissä on erilaisia lähestymistapoja arvojen tyyppien käsittelemiseksi. JavaScript-kielessä kaikilla arvoilla on olemassa jokin tyyppi, kuten `number`, `string`, `object` tai `array`. Tyypitys on kuitenkin **dynaamista**, eli muuttujiin voidaan asettaa vapaasti eri tyyppisiä arvoja ja funktiot voivat vastaanottaa ja niistä voidaan palauttaa eri tyyppisiä arvoja. Koska muuttujien, parametrien ja paluuarvojen tyypit riippuvat suoritusaikaisesta datasta, tyyppejä käsitellään vain ajonaikaisesti ohjelmaa suoritettaessa.
+Eri ohjelmointikielissä on erilaisia lähestymistapoja arvojen tyyppien käsittelemiseksi. JavaScript-kielessä kaikilla arvoilla on olemassa jokin tyyppi, kuten `number`, `string`, `object` tai `array`. Tyypitys on kuitenkin **dynaamista**, eli muuttujiin voidaan asettaa vapaasti eri tyyppisiä arvoja ja funktiot voivat vastaanottaa ja niistä voidaan palauttaa eri tyyppisiä arvoja:
 
-Dynaamisen tyypityksen heikkous, johon TypeScript pyrkii vastaamaan, on tyyppien tarkastaminen jo ennen koodin suorittamista. Katsotaan esimerkiksi seuraavaa JavaScript-kielistä esimerkkikoodia, jossa etsitään numeroita sisältävän taulukon suurinta arvoa [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max#syntax)-metodin avulla. Mitä seuraava koodi tulostaa?
+> *"JavaScript is a dynamic language with dynamic types. Variables in JavaScript are not directly associated with any particular value type, and any variable can be assigned (and re-assigned) values of all types."*
+>
+> MDN. [JavaScript data types and data structures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#dynamic_and_weak_typing)
+
+Koska muuttujien, parametrien ja paluuarvojen tyypit riippuvat suoritusaikaisesta datasta, tyyppejä käsitellään vain ajonaikaisesti ohjelmaa suoritettaessa.
+
+Yksi dynaamisen tyypityksen heikkous, johon TypeScript pyrkii vastaamaan, on tyyppien tarkastaminen jo ennen koodin suorittamista. Katsotaan esimerkiksi seuraavaa JavaScript-kielistä esimerkkikoodia, jossa etsitään numeroita sisältävän taulukon suurinta arvoa [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max#syntax)-metodin avulla. Mitä seuraava koodi tulostaa?
 
 :::warning buginen esimerkki
 ```js title="demo.js"
