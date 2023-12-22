@@ -53,6 +53,11 @@ const config: Config = {
   themeConfig: {
     // Replace with your project's social card
     image: undefined,
+    docs: {
+      sidebar: {
+        autoCollapseCategories: false
+      }
+    },
     navbar: {
       title: 'TypeScript-ohjelmointi',
       // logo: {
@@ -64,7 +69,22 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Materiaalit',
+          label: 'Intro',
+        },
+        {
+          href: '/docs/category/typescriptin-perusteet/',
+          label: 'Perusteet',
+          position: 'left',
+        },
+        {
+          href: '/docs/category/tyypit/',
+          label: 'Tyypit',
+          position: 'left',
+        },
+        {
+          href: '/docs/category/harjoitukset/',
+          label: 'Harjoitukset',
+          position: 'left',
         },
         {
           href: 'https://github.com/typescript-ohjelmointi/',
@@ -115,8 +135,8 @@ const config: Config = {
               href: 'https://opinto-opas.haaga-helia.fi/course_unit/SOF014AS3A',
             },
             {
-              label: 'Kurssin GitHub-sivut',
-              href: 'https://github.com/typescript-ohjelmointi',
+              label: 'Tämän sivuston lähdekoodit',
+              href: 'https://github.com/typescript-ohjelmointi/typescript-ohjelmointi.github.io/',
             },
           ],
         },

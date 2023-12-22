@@ -155,7 +155,7 @@ let animal = new Cat('kisu');
 let automobile = new Car('VW', 'Beetle');
 let strings = ['typescript', 'javascript'];
 
-// tieto "luokista" katoaa käännettäessä:
+// tieto luokista katoaa käännettäessä:
 console.log(typeof animal);     // 'object'
 console.log(typeof automobile); // 'object'
 console.log(typeof strings);    // 'object'
@@ -196,7 +196,9 @@ u.toUpperCase(); // aiheuttaa virheen jo käännettäessä
 
 ### Tyypin tarkastaminen ajonaikaisesti
 
-Jos käsiteltävän arvon tyyppi ei ole ennalta tiedossa, voidaan se selvittää ajonaikaisesti ehtorakenteilla ja mm. JavaScriptin `typeof`-operaation avulla. Seuraavassa esimerkissä `repeat`-funktio toistaa annettua arvoa eri tavoilla riippuen siitä, minkä tyyppinen arvo sinne annettiin. Merkkijonoa toistetaan `repeat`-metodilla, kun taas taulukon tapauksessa taulukon sisältöä toistetaan annettu määrä kertoja:
+Jos käsiteltävän arvon tyyppi ei ole ennalta tiedossa, voidaan se selvittää ajonaikaisesti ehtorakenteilla ja mm. [JavaScriptin `typeof`-operaation avulla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof).
+
+Seuraavassa esimerkissä `repeat`-funktio toistaa annettua arvoa eri tavoilla riippuen siitä, minkä tyyppinen arvo sinne annettiin. Merkkijonoa toistetaan `repeat`-metodilla, kun taas taulukon tapauksessa taulukon sisältöä toistetaan annettu määrä kertoja:
 
 ```ts
 function repeat(thing: unknown, times: number) {
@@ -206,16 +208,20 @@ function repeat(thing: unknown, times: number) {
     }
 
     if (Array.isArray(thing)) {
-        // TypeScript päättelee `thing`-muuttujan tyypiksi `any[]`
+        // TypeScript päättelee nyt `thing`-muuttujan tyypiksi `any[]`
         return new Array(times).fill(thing).flat();
     }
 
-    // annettu tyyppi on tuntematon, heitetään poikkeus
+    // jos annettu tyyppi on tuntematon, heitetään poikkeus
     throw new Error(`Could not repeat ${thing}`);
 }
 ```
 
 Huomaa, että yllä `typeof` on JavaScriptin eikä TypeScriptin ominaisuus. [Se toimiikin ainoastaan JavaScriptin omien perustyyppien tarkastamisessa](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards), eikä sillä voida tarkastaa esimerkiksi luokkia, taulukoita tai TypeScriptin tyyppejä ja rajapintoja.
+
+Koska JavaScriptissä taulukot ovat tyyppiä `object`, on yllä hyödynnetty [JavaScriptin Array.isArray-metodia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray) taulukon tarkastamiseksi.
+
+Taulukon toistamiseksi hyödynnetään ominaisuutta, jossa ensin luodaan uusi taulukko `new Array(times)`, jonka pituus määräytyy toistokertojen mukaan. Tämän jälkeen taulukon jokaiseen soluun lisätään alkuperäinen taulukko [`fill`-metodilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill). Syntynyt uusi taulukko sisältää nyt halutun määrän uusia taulukoita `[[1, 2], [1, 2]]`, jotka saadaan "litistettyä" [`flat`-metodilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) yksitasoiseksi taulukoksi: `[1, 2, 1, 2]`. Ratkaisu perustuu [tässä StackOverflow-ketjussa](https://stackoverflow.com/a/61773807) esitettyihin koodeihin.
 
 :::info
 Koska edellä esitetty `repeat`-funktio osaa käsitellä ainoastaan taulukoita tai merkkijonoja, olisi siinä parempi käyttää parametrin tyyppinä yhdistelmää: `string | any[]`.
@@ -229,4 +235,6 @@ function repeat(thing: string | any[], times: number) {
     }
 }
 ```
+
+Tällöin kääntäjä osaa jo etukäteen varoittaa, jos funktiolle ollaan antamassa epäsopivaa tyyppiä, eikä `throw new Error(...)`-riviä tarvita.
 :::

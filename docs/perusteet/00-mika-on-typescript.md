@@ -158,6 +158,17 @@ var largest = Math.max.apply(Math, numbers);
 console.log({ largest: largest });
 ```
 
-Tässä viimeisessä versiossa muuttujat on määritetty aikaisemmista esimerkeistä poiketen vanhemmalla `var`-avainsanalla ja `Math.max`-metodin kutsu sekä `{ largest: largest }` on esitetty pidemmässä muodossa.
+Tässä viimeisessä käännetyssä versiossa muuttujat on määritetty aikaisemmista esimerkeistä poiketen vanhemmalla `var`-avainsanalla ja `Math.max`-metodin kutsu sekä `{ largest: largest }` on esitetty pidemmässä muodossa:
+
+```ts {2,5,8}
+- let numbers: number[] = [42, 0, -1, 100];
++ var numbers = [42, 0, -1, 100];
+
+- let largest: number = Math.max(...numbers);
++ var largest = Math.max.apply(Math, numbers);
+
+- console.log({ largest });
++ console.log({ largest: largest });
+```
 
 Voit kokeilla itse kääntää tätä koodia eri asetuksilla [TypeScript playground -palvelussa](https://www.typescriptlang.org/play?target=9#code/DYUwLgBAdgrgtgIxAJwM4C5rycg2gXQgF4JcAWAJgBoIAGGgWgEYanbb8BuAKFEmACGyAOYhUYTLEQpiEALICwACwB0cAQA8AFCt1ScqAJQ9uAYwD2UVOdArg54VoDeEQSLGQAvse5A).
