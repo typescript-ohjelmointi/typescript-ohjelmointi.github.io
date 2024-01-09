@@ -3,7 +3,7 @@ sidebar_position: 0
 sidebar_label: 'Mikä TypeScript?'
 ---
 
-# Mikä TypeScript?
+# Mikä TypeScript on?
 
 TypeScriptin omilla sivuilla kerrotaan, että "TypeScript is JavaScript with syntax for types" ([typescriptlang.org](https://www.typescriptlang.org/)). TypeScriptin [GitHub-sivulla](https://github.com/microsoft/TypeScript) puolestaan kieltä kuvaillaan seuraavasti:
 
@@ -85,6 +85,8 @@ error TS2345: Argument of type 'number[]' is not assignable to parameter of type
 2 let largest = Math.max(numbers);
                          ~~~~~~~
 ```
+
+💡 *TypeScriptin kääntämistä ja työkaluja käsitellään tarkemmin [työkalut-osiossa](./03-tyokalut.md).*
 :::
 
 [TypeScript-kääntäjä, eli `tsc`](https://www.typescriptlang.org/docs/handbook/compiler-options.html), havaitsi yllä virheen, jossa `Math.max`-metodille annettiin numeron sijasta numerotaulukko. Metodille olisikin pitänyt antaa erillisiä numeroita, esimerkiksi. `Math.max(42, 0, -1, 100)`, eikä taulukkoa `Math.max(numbers)`.

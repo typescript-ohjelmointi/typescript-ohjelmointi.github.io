@@ -31,13 +31,15 @@ let isLeapYear: boolean = true;
 Myös kokoelmille määritellään TypeScriptissä tyypit. Taulukkojen tyypit voidaan määritellä joko syntaksilla `tyyppi[]` tai `Array<tyyppi>`:
 
 ```ts
-let positive: number[] = [1, 2, 3, 4];
-let negative: Array<number> = [-1, -2, -3, -4];
+let words: string[] = ['one', 'two', 'three'];
+let numbers: number[] = [1, 2, 3, 4];
+
+let negative: Array<number> = [-1, -2, -3, -4]; // vaihtoehtoinen tapa
 ```
 
-Edellä mainituista tavoista `tyyppi[]` vaikuttaa olevan yleisesti laajemmin käytössä, joten myös kurssin esimerkeissä käytetään jatkossa sitä.
+Edellä mainituista tavoista `tyyppi[]` vaikuttaa olevan yleisesti laajemmin käytössä kuin `Array<tyyppi>`, joten myös kurssin esimerkeissä käytetään jatkossa muotoa `tyyppi[]`.
 
-Tyyppien määrittely tällä tarkkuudella ei onneksi ole usein tarpeen, koska TypeScript osaa myös monessa tapauksessa päätellä tyypit sijoitusoperaatioiden ja `return`-lauseiden perusteella. Tyyppien päättelystä käytetään termiä *type inference*.
+Tyyppien määrittely tällä tarkkuudella ei onneksi ole usein tarpeen, koska TypeScript osaa myös monessa tapauksessa päätellä tyypit sijoitusoperaatioiden ja `return`-lauseiden perusteella. Tyyppien päättelystä käytetään termiä *type inference* ja sitä käsitellään tarkemmin seuraavissa kappaleissa.
 
 
 ## Tyyppien päätteleminen (type inference)
@@ -69,7 +71,7 @@ Vaikka muuttujille ei yllä ole määritetty tyyppejä, osaa TypeScript päätel
 let positive = [1, 2, 3, 4];    // muuttujan tyypiksi päätellään number[]
 positive.push(42);              // ok
 
-positive.push('42');            // ei ok, koska arvo on tyyppiä string
+positive.push('AA');            // ei ok, koska taulukon tyypiksi on päätelty number[]
 //            ~~~~
 // Argument of type 'string' is not assignable to parameter of type 'number'.
 ```
@@ -78,8 +80,11 @@ positive.push('42');            // ei ok, koska arvo on tyyppiä string
 Tyypin määritteleminen eksplisiittisesti on tarpeen erityisesti tyhjien tietorakenteiden ja funktion parametrien yhteydessä. TypeScript ei pysty etukäteen päättelemään, mitä arvoja tyhjään tietorakenteeseen tullaan tallentamaan tai minkä tyyppisillä parametreilla funktioita tullaan kutsumaan.
 
 ```ts
-let someValues = [];        // tämän taulukon tyyppiä ei osata päätellä
-let lottery: number[] = []; // number[] -> tähän voidaan jatkossa lisätä vain numeroita
+// tämän taulukon tyyppiä ei osata päätellä:
+let someValues = [];
+
+// number[] -> tähän voidaan jatkossa lisätä numeroita:
+let lottery: number[] = [];
 ```
 
 ### Funktioiden tyypit
@@ -123,28 +128,28 @@ TypeScript ei kuitenkaan voi etukäteen tietää, löytyykö halutusta indeksist
 :::danger Käännösvirhe
 
 ```ts
-let values = ['Monday', 'Tuesday', 'Wednesday'];
+let days = ['Monday', 'Tuesday', 'Wednesday'];
 
-let first = values.at(0);
+let first = days.at(0);   // undefined | string
 first.toUpperCase();
-// ^^ 'first' is possibly 'undefined'.
+// Error: 'first' is possibly 'undefined'.
 ```
 :::
 
 Jos olet aivan varma tietyn arvon tyypistä, voit käyttää `as`-avainsanaa, joka ohittaa TypeScriptin päättelylogiikan. Vaihtoehtoisesti voit käyttää ["non-null assertion"-operaattoria](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator), eli huutomerkkiä `!`, joka ohittaa tyhjän arvon tarkastamisen:
 
 ```ts
-let values = ['Monday', 'Tuesday', 'Wednesday'];
+let days = ['Monday', 'Tuesday', 'Wednesday'];
 
-let second = values.at(1) as string;   // string
-let last = values.at(-1)!;             // string
+let second = days.at(1) as string;   // string
+let last = days.at(-1)!;             // string
 ```
 
 Huomaa, että `!`- ja `as`-operaattorit eivät takaa, että arvo olisi oikeasti ajonaikaisesti olemassa. Siksi on tärkeää myös tarkastaa esimerkiksi taulukon pituus ennen kuin haet arvoja tietyistä indekseistä.
 
 :::tip at-metodi
 
-Edellä käytetty [`at`-metodi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at) on osa JavaScriptiä ja se toimii sekä positiivisilla että negatiivisilla indekseillä:
+Edellä käytetty [`at`-metodi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at) on osa JavaScriptiä ja se toimii monilta osin kuten hakasulkuperaattori `values[0]`. Merkittävämpänä erona `at`-metodi toimii sekä positiivisilla että negatiivisilla indekseillä:
 
 > *"The at() method takes an integer value and returns the item at that index, allowing for positive and negative integers. Negative integers count back from the last item in the array."*
 >
@@ -171,16 +176,19 @@ let animal = new Cat('kisu');
 let automobile = new Car('VW', 'Beetle');
 let strings = ['typescript', 'javascript'];
 
-// tieto luokista katoaa käännettäessä:
+// tieto luokista katoaa käännettäessä.
+// Koodia suoritettaessa sekä olioista että taulukoista tulostuu tyypiksi `object`:
 console.log(typeof animal);     // 'object'
 console.log(typeof automobile); // 'object'
 console.log(typeof strings);    // 'object'
 ```
 
+Palaamme tyyppien tarkastamiseen suorituksen aikana myöhemmin mm. ["Tyyppivahdit"-luvussa](./07-type-guards.md).
+
 
 ### Any ja unknown
 
-Toisinaan datan tyyppi ei ole tiedossa tai sillä ei ole merkitystä. TypeScriptin `any`-tyyppi kääntää tavallaan TypeScriptin tyyppitarkastukset "pois päältä" kyseisen arvon kohdalta:
+Toisinaan datan tyyppi ei ole tiedossa tai sillä ei ole merkitystä. TypeScriptin `any`-tyyppi kytkee TypeScriptin tyyppitarkastukset "pois päältä" kyseisen arvon kohdalta:
 
 ```ts
 // `any` tyyppiä voidaan käyttää silloin, kun arvon tyypillä ei ole merkitystä:
@@ -189,7 +197,18 @@ function logAnything(thing: any) {
 }
 ```
 
-`any`-tyyppi sallii, että muuttujan kautta kutsutaan mitä tahansa metodia tai että siihen asetettua arvoa käytetään missä tahansa laskuoperaatiossa. Tämä ei ole usein toivottavaa. Mikäli arvon tyypillä ei ole merkitystä, tai se ei ole ennalta tiedossa, on turvallisempaa käyttää vaihtoehtoista `unknown`-tyyppiä. `unknown` sallii `any`:n tavoin minkä tahansa arvon, mutta se ei kytke tyyppitarkastuksia pois päältä, vaan estää kaikki operaatiot tuntemattoman muuttujan kautta:
+`any`-tyyppi sallii, että muuttujan kautta kutsutaan mitä tahansa metodia tai että siihen asetettua arvoa käytetään missä tahansa laskuoperaatiossa. Tämä ei ole usein toivottavaa. Esimerkiksi seuraava koodi aiheuttaa virheen vasta koodia suoritettaessa:
+
+```ts
+function logAnything(thing: any) {
+    console.log(new Date(), thing.substring(0, 10));
+}
+
+// aiheuttaa suoritettaessa virheen TypeError: thing.substring is not a function
+logAnything(123);
+```
+
+Mikäli arvon tyypillä ei ole merkitystä, tai se ei ole ennalta tiedossa, on turvallisempaa käyttää vaihtoehtoista `unknown`-tyyppiä. `unknown` sallii `any`:n tavoin minkä tahansa arvon, mutta se ei kytke tyyppitarkastuksia pois päältä. Sen sijaan se estää kaikki operaatiot, kuten metodikutsut, tuntemattoman muuttujan kautta:
 
 ```ts
 // usein on kuitenkin turvallisempaa käyttää tyyppiä `unknown`:
@@ -198,15 +217,17 @@ function logUnknown(thing: unknown) {
 }
 ```
 
-Edellä esitetyistä tyypeistä `any` on siinä mielessä riskialttiimpi, että sen kautta tehtävien operaatioiden osalta TS ei tee tarkastuksia. Unknown-tyyppi puolestaan aiheuttaa virheen heti käännösvaiheessa, mikäli sen kautta ollaan suorittamassa mahdollisesti virheellisiä operaatioita:
+Tällä versiolla `thing.substring(0, 10)` aiheuttaisi "Property 'substring' does not exist on type 'unknown'"-virheen jo koodia kirjoitettaessa tai viimeistään käännösvaiheessa.
+
+Edellä esitetyistä tyypeistä `any` on siis siinä mielessä riskialttiimpi, että sen kautta tehtävien operaatioiden osalta TS ei tee tarkastuksia. Unknown-tyyppi puolestaan aiheuttaa virheen heti käännösvaiheessa, mikäli sen kautta ollaan suorittamassa mahdollisesti virheellisiä operaatioita:
 
 ```ts
 let a: any = 1;
 let u: unknown = 1;
 
-a.toUpperCase(); // aiheuttaa virheen suoritettaessa
+a.toUpperCase(); // aiheuttaa virheen vasta suoritettaessa
 
-u.toUpperCase(); // aiheuttaa virheen jo käännettäessä
+u.toUpperCase(); // aiheuttaa virheen kirjoitettaessa tai käännettäessä
 // ~~~~~~~~~~~~  Property 'toUpperCase' does not exist on type 'unknown'
 ```
 
@@ -218,7 +239,9 @@ TypeScript tarkastaa tyypit automaattisesti käännösvaiheessa hyödyntäen Typ
 
 Jos käsiteltävän arvon tyyppi ei ole ennalta tiedossa, voidaan se selvittää ajonaikaisesti ehtorakenteilla ja mm. [JavaScriptin `typeof`-operaation avulla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof).
 
-Seuraavassa esimerkissä `repeat`-funktio toistaa annettua arvoa eri tavoilla riippuen siitä, minkä tyyppinen arvo sinne annettiin. Merkkijonoa toistetaan `repeat`-metodilla, kun taas taulukon tapauksessa taulukon sisältöä toistetaan annettu määrä kertoja:
+#### Esimerkki: repeat
+
+Seuraavassa esimerkissä `repeat`-funktio toistaa annettua arvoa eri tavoilla riippuen siitä, minkä tyyppinen arvo sinne annettiin. Merkkijonoa toistetaan `repeat`-metodilla tekemällä yksi uusi, pidempi merkkijono, kun taas taulukon tapauksessa taulukon sisältöä toistetaan annettu määrä kertoja:
 
 ```ts
 function repeat(thing: unknown, times: number) {
@@ -244,7 +267,11 @@ Koska JavaScriptissä taulukot ovat tyyppiä `object`, on yllä hyödynnetty [Ja
 
 :::tip Taulukon kopiointi
 
-Taulukon toistamiseksi hyödynnetään ominaisuutta, jossa ensin luodaan uusi taulukko `new Array(times)`, jonka pituus määräytyy toistokertojen mukaan. Tämän jälkeen taulukon jokaiseen soluun lisätään alkuperäinen taulukko [`fill`-metodilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill). Syntynyt uusi taulukko sisältää nyt halutun määrän uusia taulukoita `[[1, 2], [1, 2]]`, jotka saadaan "litistettyä" [`flat`-metodilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) yksitasoiseksi taulukoksi: `[1, 2, 1, 2]`. Ratkaisu perustuu [tässä StackOverflow-ketjussa](https://stackoverflow.com/a/61773807) esitettyihin koodeihin.
+Taulukon toistamiseksi hyödynnetään ominaisuutta, jossa ensin luodaan uusi taulukko `new Array(times)`, jonka pituus määräytyy toistokertojen mukaan.
+
+Tämän jälkeen luodun taulukon jokaiseen soluun lisätään alkuperäinen taulukko [`fill`-metodilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill).
+
+Luomamme taulukko sisältää nyt halutun määrän uusia taulukoita, esim. `[[1, 2], [1, 2]]`, jotka saadaan "litistettyä" [`flat`-metodilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) yksitasoiseksi taulukoksi: `[1, 2, 1, 2]`. Ratkaisu perustuu [tässä StackOverflow-ketjussa](https://stackoverflow.com/a/61773807) esitettyihin koodeihin.
 :::
 
 Koska edellä esitetty `repeat`-funktio osaa käsitellä ainoastaan taulukoita tai merkkijonoja, olisi siinä parempi käyttää parametrin tyyppinä yhdistelmää: `string | any[]`.
