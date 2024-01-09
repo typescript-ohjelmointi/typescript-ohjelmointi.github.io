@@ -1,10 +1,12 @@
 ---
-sidebar_position: 3
+sidebar_position: 9
 ---
 
 # JavaScript-koodin tyyppimäärittelyt
 
-TypeScriptillä kirjoittamasi ohjelmat hyödyntävät tyypillisesti erilaisia kirjastoja, jotka saattavat olla alun perin JavaScriptillä toteutettuja. Kuinka TypeScript osaa auttaa sinua näiden projektien tyyppien tarkastamisessa ja oikeiden tyyppien ehdottamisessa?
+TypeScriptillä kirjoittamasi ohjelmat hyödyntävät tyypillisesti erilaisia kirjastoja, jotka saattavat olla alun perin JavaScriptillä toteutettuja. Esimerkiksi suosittu [react-kirjasto](https://github.com/facebook/react) on toteutettu JavaScriptillä, mutta sitä käytetään laajasti TypeScript-projekteissa.
+
+Kuinka TypeScript osaa auttaa sinua näiden projektien tyyppien tarkastamisessa ja oikeiden tyyppien ehdottamisessa?
 
 > *"Throughout the sections you’ve read so far, we’ve been demonstrating basic TypeScript concepts using the built-in functions present in all JavaScript runtimes. However, almost all JavaScript today includes many libraries to accomplish common tasks. Having types for the parts of your application that aren’t your code will greatly improve your TypeScript experience. Where do these types come from?"*
 >

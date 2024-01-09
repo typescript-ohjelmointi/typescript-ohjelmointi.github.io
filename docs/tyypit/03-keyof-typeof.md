@@ -21,7 +21,7 @@ const takeOutTrash = {
 Tätä olemassa olevaa oliota voidaan nyt hyödyntää esimerkiksi uuden `Task`-tyypin määrittelemiseksi:
 
 ```ts
-type Task = typeof takeOutTrash;
+type Task = typeof takeOutTrash; // { title: string; description: string; completed: boolean; }
 ```
 
 Lisätietoja `typeof`-operaattorista löydät TypeScriptin [käsikirjasta](https://www.typescriptlang.org/docs/handbook/2/typeof-types.html).
@@ -29,6 +29,8 @@ Lisätietoja `typeof`-operaattorista löydät TypeScriptin [käsikirjasta](https
 :::info typeof !== typeof
 
 On hyvä huomioida, että TypeScriptin `typeof`-operaattori liittyy TypeScriptin tyyppien määrittelemiseen, kun taas [JavaScriptin `typeof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) on ajonaikaisesti suoritettava lauseke.
+
+Hieman epäonnisesti nämä kaksi operaatiota ovat nimetty täysin samalla tavalla 😕:
 
 * TS: https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 * JS: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof
