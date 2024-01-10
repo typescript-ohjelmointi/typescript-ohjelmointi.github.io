@@ -4,11 +4,14 @@ sidebar_position: 4
 
 # Keyof ja typeof
 
-TypeScript osaa hyödyntää olemassa olevien arvojen ja funktioiden tyyppejä uusien tyyppien määrittelemiseksi.
+TypeScript osaa ilmaista tyyppejä monipuolisesti olemassa olevien arvojen ja tyyppien avulla. Mikäli ohjelmakoodissa on olemassa jo jokin vakioarvo, sen tyypistä voidaan muodostaa kätevästi uudelleenkäytettävä alias `typeof`-operaattorilla. Toisaalta `keyof`-operaattorilla voit muodostaa unionin minkä tahansa tyypin avaimista.
+
+[Unionit ja leikkaukset](./05-unions-intersections.md) ovat myös hyödyllisiä tapoja uusien tyyppien ilmaisemiseksi toisten tyyppien avulla, ja näitä käsitellään materiaalin [seuraavissa osissa](./05-unions-intersections.md).
+
 
 ## typeof
 
-Otetaan esimerkiksi seuraava olio, joka sisältää kolme muuttujaa:
+Mikäli ohjelmakoodissa on olemassa jo jokin vakioarvo, sen tyypistä voidaan muodostaa kätevästi uudelleenkäytettävä alias `typeof`-operaattorilla. Otetaan esimerkiksi seuraava olio, joka sisältää kolme muuttujaa, kaksi merkkijonoa ja yhden totuusarvon:
 
 ```ts
 const takeOutTrash = {
@@ -21,7 +24,7 @@ const takeOutTrash = {
 Tätä olemassa olevaa oliota voidaan nyt hyödyntää esimerkiksi uuden `Task`-tyypin määrittelemiseksi:
 
 ```ts
-type Task = typeof takeOutTrash; // { title: string; description: string; completed: boolean; }
+type Task = typeof takeOutTrash; // tyyppi { title: string; description: string; completed: boolean; }
 ```
 
 Lisätietoja `typeof`-operaattorista löydät TypeScriptin [käsikirjasta](https://www.typescriptlang.org/docs/handbook/2/typeof-types.html).
@@ -30,7 +33,7 @@ Lisätietoja `typeof`-operaattorista löydät TypeScriptin [käsikirjasta](https
 
 On hyvä huomioida, että TypeScriptin `typeof`-operaattori liittyy TypeScriptin tyyppien määrittelemiseen, kun taas [JavaScriptin `typeof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) on ajonaikaisesti suoritettava lauseke.
 
-Hieman epäonnisesti nämä kaksi operaatiota ovat nimetty täysin samalla tavalla 😕:
+Hieman epäonnisesti nämä kaksi operaatiota ovat nimetty täysin samalla tavalla, mutta tekevät eri asioita 😕:
 
 * TS: https://www.typescriptlang.org/docs/handbook/2/typeof-types.html
 * JS: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof
@@ -77,3 +80,22 @@ incrementComponent(myColor, 'yellow', 10);
 ```
 **Argument of type '"yellow"' is not assignable to parameter of type 'keyof Color'**
 :::
+
+
+## Soveltava esimerkki
+
+Kuten useissa muissakin tapauksissa, TypeScriptin tyyppijärjestelmä taipuu myös `typeof`- ja `keyof`-operaattoreiden kanssa moneen. Niitä voidaan siis esimerkiksi yhdistellä samaan lausekkeeseen.
+
+Esimerkiksi seuraavassa esimerkissä luodaan olio, jossa avaimina on t-paidan kokojen lyhenteet ja arvoina koko tekstinä. Alemmalla rivillä muodostetaan uusi `Size`-tyyppi, jossa `sizes`-oliosta otetaan ensin tyyppi `typeof`-operaatiolla, ja tästä tyypistä otetaan avaimet `keyof`-operaatiolla. Lopputuloksena on `Size`-tyyppi, joka on unioni arvoista `s`, `m` ja `l`:
+
+```ts
+let sizes = {
+    's': 'small',
+    'm': 'medium',
+    'l': 'large'
+};
+
+type Size = keyof typeof sizes; // 's' | 'm' | 'l'
+```
+
+Vaikka tämänkaltaiset käyttötapaukset ovat usein tarpeettomia, oikein käytettyinä niiden avulla voidaan vähentää koodin duplikointia ja edistää ylläpidettävyyttä, kun tyyppien määritykset päivittyvät automaattisesti, mikäli koodiin lisätään myöhemmin esimerkiksi uusia kokoja, kuten `xs` ja `xl`.

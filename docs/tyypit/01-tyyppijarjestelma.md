@@ -114,7 +114,7 @@ Paluuarvon tyyppi `string[]` puolestaan voitaisiin tässä tapauksessa jättää
 
 ### Taulukot (array)
 
-Taulukot ovat tyypitettyjä siinä missä yksittäiset muuttujat, esim. `string[]` tai `number[]`.
+Taulukot ovat tyypitettyjä siinä missä yksittäiset muuttujat, esim. `string[]`, `number[]` tai `boolean[]`.
 
 ```ts
 let faces = ['😀', '🙁'];          // string[]

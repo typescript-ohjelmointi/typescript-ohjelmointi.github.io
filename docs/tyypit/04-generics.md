@@ -16,6 +16,7 @@ Aiheeseen perehtymiseksi suosittelemme seuraavaa lyhyttä videota:
 Mikäli haluat toteuttaa esimerkiksi funktion, joka palauttaa merkkijonotaulukosta satunnaisen arvon, voisit toteuttaa sen esimerkiksi seuraavasti:
 
 ```ts
+/** Returns a random string from the given array of strings */
 function getRandom(collection: string[]): string {
     let randomIndex = Math.trunc(Math.random() * collection.length);
     return collection[randomIndex];
@@ -35,6 +36,7 @@ Tyyppiparametri määritellään funktion nimen ja sulkujen välissä kulmasulku
 Kun funktion otsikoksi määritellään `function getRandom<T>(collection: T[]): T` funktio hyväksyy minkä tahansa taulukon ja TypeScript tietää paluuarvon olevan aina samaa tyyppiä kuin annettu taulukko. Tämän muutoksen jälkeen funktiota voidaankin kutsua yhtä hyvin merkkijono- kuin numerotaulukon kanssa:
 
 ```ts
+/** Returns a random item from the given array */
 function getRandom<T>(collection: T[]): T {
     let randomIndex = Math.trunc(Math.random() * collection.length);
     return collection[randomIndex];
@@ -57,7 +59,7 @@ interface Box<Type> {
 
 const greeting: Box<string> = { contents: 'hello' }
 
-// TypeScript tarkastaa parametrisoidun tyypin
+// TypeScript tarkastaa parametrisoidun tyypin ja huomaa virheen:
 greeting = { contents: 1 } // error
 
 
