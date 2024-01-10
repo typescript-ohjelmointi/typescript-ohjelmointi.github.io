@@ -29,7 +29,7 @@ $ npm install --save-dev @types/node    # https://www.npmjs.com/package/@types/n
 
 Tyyppimääritykset saattavat myös asentua automaattisesti projektisi riippuvuuksien kautta. Esimerkiksi asentaessamme `ts-node`-paketin, asentuu sen kautta myös yllä esitetty `@types/node`:
 
-```sh
+```sh {14}
 $ npm ls -a
 ts-oppitunti-2023-08-31@ /workspaces/ts-oppitunti-2023-08-31
 ├─┬ ts-node@10.9.1
@@ -81,7 +81,7 @@ Kirjoitushetkellä tyyppikirjastosta löytyy tyypit noin 7672:lle paketille, ja 
 Mikäli TypeScriptillä kirjoitettu projekti julkaistaan esimerkiksi npm-palvelussa, voidaan sille generoida tyyppimäärittelyt automaattisesti. Näin pakettisi käyttäjät saavat TypeScript-tyypit automaattisesti käyttöönsä:
 
 ```shell
-$ npx tsc --declaration
+npx tsc --declaration
 ```
 
 Itse tyyppimääritykset, kuten `koodi.d.ts`, näyttävät esim. seuraavilta:

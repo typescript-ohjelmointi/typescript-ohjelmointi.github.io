@@ -7,7 +7,7 @@ sidebar_position: 6
 TypeScriptissä eri tyyppejä voidaan ilmaista joukko-opin termien mukaisesti unioneilla (union) ja leikkauksilla (intersection). Unionin tapauksessa tyyppi käsittää ikään kuin vaihtehtoisia toisistaan erillisiä tyyppejä. Leikkaus puolestaan määrittelee tyypin, joka täyttää molempien siihen kuuluvien tyyppien piirteet.
 
 
-## Unionit `a | b`
+## Unionit (`a | b`)
 
 Uusia tyyppejä voidaan ilmaista yhdistelemällä vakioita tai olemassa olevia tyyppejä. Jos esimerkiksi haluamme luoda tyypin `Size`, joka sallii ainoastaan merkkijonovakiot `s`, `m` ja `l`, voimme luoda sen unionin `|` avulla seuraavasti:
 
