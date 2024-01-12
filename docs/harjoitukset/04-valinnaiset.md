@@ -6,6 +6,8 @@ sidebar_position: 4
 
 Tämän sivun tehtävät eivät ole kurssin suorittamisen kannalta välttämättömiä eikä niitä tarvitse erikseen palauttaa. Saat myös valinnaisiin tehtäviin tukea kurssin keskustelukanavilla.
 
+Valinnaisia tehtäviä löydät [erillisistä GitHub-repositorioista](#github-tehtävärepositoriot), [codewars.com-palvelusta](#codewarscom) ja [typescript-exercises.github.io-palvelusta](#typescript-exercisesgithubio).
+
 
 ## GitHub-tehtävärepositoriot
 

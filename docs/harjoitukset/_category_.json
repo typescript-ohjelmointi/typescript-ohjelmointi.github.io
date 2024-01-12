@@ -2,7 +2,7 @@
   "label": "Harjoitukset",
   "position": 4,
   "link": {
-    "description": "Kurssilla on sekä suorituksen kannalta pakollisia tehtäviä että vapaaehtoisia tehtäviä, joiden avulla syvennät oppimistasi. Pakolliset tehtävät palautetaan Teamsiin ja ne katselmoidaan manuaalisesti, kun taas vapaaehtoisissa tehtävissä hyödynnetään automaattista tarkastusta.",
+    "description": "Kurssilla on sekä kurssin suorituksen kannalta pakollisia tehtäviä että vapaaehtoisia tehtäviä, joiden avulla syvennät oppimistasi. Pakolliset tehtävät palautetaan Teamsiin ja ne katselmoidaan manuaalisesti, kun taas vapaaehtoisissa tehtävissä hyödynnetään automaattista tarkastusta.",
     "type": "generated-index"
   }
 }
