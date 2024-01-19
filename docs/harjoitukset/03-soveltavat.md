@@ -8,8 +8,11 @@ Tämän sivun tehtävät käsittelevät TypeScriptin edistyneempiä tyyppejä. T
 
 Tehtävät palautetaan kerralla kurssin Teams-ryhmästä löytyvään tehtävään. Ohjeita tehtävän palauttamiseen löydät [Microsoftin ohjeista](https://support.microsoft.com/en-au/topic/turn-in-an-assignment-in-microsoft-teams-e25f383a-b747-4a0b-b6d5-a2845a52092b) ja tarvittaessa voit kysyä apua Teams-kanavalla. Palauta kaikki tiedostot mieluiten yhtenä zip-pakettina.
 
+:::info 
 
-## Nämä tehtävät julkaistaa kurssin kolmannella viikolla
+## Nämä tehtävät julkaistaan kurssin kolmannella viikolla
+
+:::
 
 <!--
 ```ts
