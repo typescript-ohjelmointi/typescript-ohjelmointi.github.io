@@ -6,36 +6,50 @@ sidebar_position: 3
 
 Tämän sivun tehtävät käsittelevät TypeScriptin hyödyntämistä kuvitteellisen sisällönhallintajärjestelmän (Content Management System, CMS) kehityksessä. Voit luoda näitä tehtäviä varten uuden TypeScript-projektin tai jatkaa kehittämistä aikaisemmissa harjoituksissa käyttämässäsi projektissa.
 
-Tämän sivun tehtäviin ei ole yhtä ainoaa oikeaa ratkaisua. Tärkeintä on, että sovellat oppimaasi ja toteutat ratkaisun parhaaksi katsomallasi tavalla. Saadaksesi tehtävästä hyväksytyn suorituksen sinun ei tarvitse saada kaikkia kohtia toteutettua. Riittää, että osoitat kykyä soveltaa kurssin sisällössä käsiteltyjä aiheita.
+Tämän sivun tehtäviin ei ole yhtä ainoaa oikeaa ratkaisua. Tärkeintä on, että sovellat oppimaasi ja toteutat ratkaisun parhaaksi katsomallasi tavalla. Saat myös tarvittaessa muokata annettua koodia omanlaisesi ratkaisun toteuttamiseksi.
+
+Saadaksesi tehtävästä hyväksytyn suorituksen sinun ei tarvitse saada kaikkia kohtia toteutettua. Riittää, että osoitat kykyä soveltaa kurssin sisällössä käsiteltyjä aiheita.
+
+Tehtävän pohjaksi löytyy valmis [advanced_exercice.ts-tiedosto](https://raw.githubusercontent.com/typescript-ohjelmointi/typescript-ohjelmointi.github.io/main/docs/harjoitukset/advanced_exercice.ts), johon tekemäsi ratkaisut on tarkoitus täydentää. **Tiedosto sisältää aluksi useita käännösvirheitä**, mutta edetessäsi tehtävässä virheiden pitäisi poistua tai vähentyä. Optimaalisessa tapauksessa **sinun tarvitsee muuttaa ainoastaan kohtia, jotka on merkitty `TODO`-kommentein**. Palauta lopuksi muokkaamasi tiedosto Teamsiin.
 
 
 ## Tehtävänanto
 
 Kehität sovellusta, joka käsittelee sisällönhallintajärjestelmän luomien verkkosivujen rakennetta. Tavoitteesi on luoda TypeScript-tyyppejä edustamaan tämän järjestelmän osia määrittelemällä mm. elementtien, komponenttien ja sivujen tyypit.
 
-Elementti voi olla esimerkiksi painike, kuva tai teksti. Komponentti puolestaan on uudelleenkäytettävä sivun osa, joka koostuu yhdestä tai useammasta elementistä. Sivu, eli ylimmän tason rakenne, koostuu otsikosta, id:stä, kuvauksesta ja joukosta komponentteja. Luokkakaaviona asiaa voitaisiin esittää esimerkiksi seuraavasti:
+Elementit voivat olla painikkeita, kuvia tai tekstiä:
+
+```ts
+type CommonElementTypes = "Button" | "Img" | "Text";
+```
+
+Komponentti puolestaan on uudelleenkäytettävä sivun osa, joka koostuu yhdestä tai useammasta elementistä:
+
+```ts
+type Component = {
+    name: string;
+    type: ComponentTypes;
+    elements: CommonElementTypes[];
+};
+```
+
+Sivu, eli ylimmän tason rakenne, koostuu otsikosta, id:stä,  otsikosta, tyypistä, kuvauksesta ja joukosta komponentteja. Luokkakaaviona asiaa voitaisiin esittää esimerkiksi seuraavasti:
 
 ```mermaid
 classDiagram
 
-class Element {
-  - type: button | image | text
-  - ...
-}
-
 class Component {
-  - id: string
-  - elements: Element[]
-  - ...
+  - name: string
+  - type: ComponentTypes
+  - elements: CommonElementTypes[]
 }
 
 class Page {
-  - title: string
   - id: string
-  - layout: ???
+  - title: string
+  - type: PageTypes
   - description: string
   - components: Component[]
-  - ...
 }
 
 Component --|> Element
@@ -44,77 +58,65 @@ Page --|> Component
 ```
 
 
-## Vaihe 1: määrittele tietotyypit `Page`, `Component` ja `Element`
+## Vaihe 1: Täydennä `Page`-tyyppi sekä `mainSection`-olio
 
-Määrittele TypeScript-tyypit `Element`, `Component` ja `Page`. Määrittele tyypit siten, että `Page` hyödyntää `Component`-tyyppiä, joka puolestaan hyödyntää `Element`-tyyppiä. Määrittele yllä olevassa kaaviossa esitetyt attribuutit sekä niiden lisäksi omia attribuutteja, joita uskot sivuston rakenteessa tarvittavan.
+[Tehtävätiedostossa](https://raw.githubusercontent.com/typescript-ohjelmointi/typescript-ohjelmointi.github.io/main/docs/harjoitukset/advanced_exercice.ts) on määritettynä sivua varten `type Page`. Tästä tyypistä puuttuu kuitenkin yksi attribuutti. Lisää puuttuva attribuutti niin, että tiedostossa alempana `mainPage`-muuttujaan liittyvä käännösvirhe poistuu. Vihjeen puuttuvasta attribuutista löydät ylempää luokkakaaviosta sekä tehtävätiedostossa esiintyvästä oliosta.
 
-`Element`-tyypin tulee voida mallintaa niin painikkeita, kuvia kuin tekstiä. Voit ratkaista tämän tekemällä esimerkiksi jokaista eri tyyppistä elementtiä varten erillisen tyypin ja toteuttaa `Element`:in näiden unionina. Myös muut tavat kelpaavat.
+Lisää myös hieman alempaa `mainSection`-olioon siitä puuttuva taulukko. Voit itse vapaasti päättää, mitä elementtityyppejä `mainSection` sisältää.
 
-`Page`-tyypillä on kaaviossa `layout`-attribuutti, jonka tarkoituksena on määritellä "sivupohja", jonka mukaisesti sivun komponentit asetellaan. Näitä `layout`:eja voivat olla esimerkiksi `"MainPage"`, `"ArticlePage"`, `"ContactPage"` tai `"DefaultPage"`. Toteuta layout parhaaksi katsomallasi tavalla siten, että myös uusia sivupohjia voidaan lisätä kohtuullisella vaivalla myöhemmin.
 
-:::info
+## Vaihe 2: alisivutyyppi `SubPage`
 
-Jos TypeScript-projektissasi on mukana [*dom*-kirjasto](https://www.typescriptlang.org/docs/handbook/dom-manipulation.html), et todennäköisesti voi nimetä elementtityyppiä `Element`-nimiseksi:
+Perehdy seuraavaksi tehtävätiedoston `SubPage`-tyyppiin:
 
-> ⛔ lib.dom.d.ts: 'Element' was also declared here.
+```ts
+type SubPage = ...
+```
 
-Tämä johtuu siitä, että dom-kirjastossa [on jo valmiiksi määritettynä tyyppi nimeltä `Element`](https://github.com/microsoft/TypeScript/blob/593af47fa122a8017b956580856faa0e87aab4b6/src/lib/dom.generated.d.ts#L7624). Tässä tapauksessa anna omalle tyypillesi nimeksi esimerkiksi `PageElement`.
+Alisivu eli `SubPage` on muuten kuten yllä määritelty `Page`, mutta alisivulla ei ole kuvausta ja sillä on yläsivu. Yhteys yläsivuun tulee toteuttaa uudella `parentId`-muuttujalla, jolla viitataan yläsivun `id`:hen .
+
+:::tip
+
+Pyri toteuttamaan `SubPage` hyödyntäen [aputyyppejä](../tyypit/08-utility-types.md) sekä [leikkausta (intersection)](../tyypit/05-unions-intersections.md) siten, että sinun ei tarvitse toistaa tässä kohdassa `Page`-tyyppiin määritettyjä ominaisuuksia.
 
 :::
 
+## Vaihe 3: geneeriset sivu- ja komponenttityypit
 
-## Vaihe 2: esimerkkisivu, joka hyödyntää yllä määritettyjä tyyppejä
+Sovelluksesi kehittyessä haluat tukea myös edistyneempiä tyyppejä.
 
-Määrittele `mainPage`-sivu, joka edustaa kuvitteellisen sivuston etusivua. Määrittele tälle sivulle `heading`-, `mainSection`- ja `footer`-komponentit parhaaksi katsomillasi elementeillä siten, että se saattaisi muistuttaa jotain yksinkertaista todellista sivua. Kaikkien edellä mainittujen komponenttien sisällä voi olla tekstiä, kuvia ja painike-elementtejä. Esimerkiksi alatunnisteessa (`footer`), on tyypillisesti tekstielementtejä yhteystiedoille tai muulle alatunnistesisällölle.
+Edistyneempien tyyppien tarkoituksena on mahdollistaa eri komponenteille ja sivuille erilaisia lisätietoja ja toisaalta myös rajoittaa sitä, missä kohdin sivuja eri tyyppisiä sisältöjä voidaan käyttää. Esimerkiksi oheisessa `Header`-tyypissä halutaan sallia vain painikkeita ja kuvia:
 
 ```ts
-const mainPage: Page = {
-    // TODO
-};
+type HeaderComponent = BaseComponent<"Header", "Button" | "Img">;
 ```
 
-## Vaihe 3: alisivutyyppi `SubPage`
-
-Toteuta seuraavaksi uusi `SubPage`-tyyppi. Alisivu eli `SubPage` on muuten kuten yllä määritelty `Page`, mutta alisivulla ei ole kuvausta ja sillä on yläsivu. Voit toteuttaa yhteyden yläsivuun joko id:n avulla (`parentId: string`) tai viittaamalla suoraan pääsivuun (`parent: Parent`).
-
-Pyri toteuttamaan `SubPage` hyödyntäen [aputyyppejä](../tyypit/08-utility-types.md) sekä [leikkausta (intersection)](../tyypit/05-unions-intersections.md).
-
-Luo lisäksi alisivu "About us" edellisessä vaiheessa luomallesi pääsivulle parhaaksi katsomallasi sisällöllä.
+Täydennä tehtävätiedostoon seuraavaksi `FooterComponent`-tyyppi, jonka nimi on "Footer" ja joka sallii vain tekstiä ja kuvia:
 
 ```ts
-const aboutUs: SubPage = {
-    // TODO
-};
+type FooterComponent = BaseComponent<"?", "?">;
 ```
 
 :::info
 
-Huomaa, että voit uudelleenkäyttää pääsivun komponentteja tai elementtejä. Pyri kuitenkin olemaan kopioimatta koodia. Koodin kopioinnin sijasta voit viitata molemmista sivuista samaan komponenttiin tai elementtiin.
+Tämän `FooterComponent`-tyypin täydentäminen korjaa käännösvirheet myös useista alempana olevista tyypeistä.
 
 :::
 
-## Vaihe 4: geneeriset sivu- ja komponenttityypit
+## Vaihe 4: `subPageAdvanced`-olion korjaaminen
 
-Sovelluksesi kehittyessä haluat tukea myös edistyneempiä tyyppejä. Edistyneempien tyyppien tarkoituksena on mahdollistaa eri komponenteille ja sivuille erilaisia lisätietoja ja toisaalta myös rajoittaa sitä, missä kohdin sivuja eri tyyppisiä sisältöjä voidaan käyttää.
+Viimeisenä vaiheena pyri korjaamaan `subPageAdvanced`-olion määrittelyssä esiintyvä käännösvirhe.
 
-Luo uusi [geneerinen](../tyypit/04-generics.md) `BaseComponent`-tyyppi, jota voidaan käyttää tarkempien komponenttien luomiseen. Tämän `BaseComponent`:in avulla on tarkoitus mahdollistaa esimerkiksi alatunnistekomponentteja, jotka sallivat vain tekstielementtejä.
+Käännösvirheen ratkaisemiseksi sinun tulee perehtyä `SubPageAdvanced`-tyyppiin sekä siihen liittyviin kommentteihin. Vain tietyt komponentit ovat tässä tyypissä sallittuja, ja vain tietyssä järjestyksessä.
 
-:::tip Esimerkki
+:::tip
 
-Aikaisempien tyyppien toteutuksesta riippuen tämä vaihe voidaan ratkaista monilla eri tavoilla. Voit myös luoda uusia tyyppejä, joita ei pyydetä tehtävänannossa. `BaseComponent`-tyypin avulla on tarkoituksena mahdollistaa tarkemmin rajattuja tyyppejä, joilla esim. `FooterComponent` sallii vain `TextElement`-tyyppisiä elementtejä, kun taas `AnyComponent` sallii minkä tahansa `PageElement`-elementin:
+Viimeisen osan ratkaisemiseksi sinun tarvitsee **poistaa** virheellinen sisältö. Älä siis turhaan muuta virheellistä sisältöä äläkä tyyppimäärityksiä.
 
-```ts
-// only text allowed in the footer:
-type FooterComponent = BaseComponent<TextElement>;
-
-// this component type allows any element type:
-type AnyComponent = BaseComponent<PageElement>
-```
 :::
-
-Vastaavasti määritä sivuja varten uusi [geneerinen](../tyypit/04-generics.md) `BasePage`-tyyppi, joka vastaa muilta osin `Page`-tyyppiä, mutta sallii vain sille tyyppiparametrina annetun tyypin mukaisia komponentteja. Onnistutko määrittelemään `BasePage`- ja `BaseComponent`-tyyppien avulla uuden `TextPage`-sivutyypin, joka sallii ainoastaan tekstielementtejä?
-
 
 ## Tehtävän palauttaminen
 
-Tehtävät palautetaan kerralla kurssin Teams-ryhmästä löytyvään tehtävään. Ohjeita tehtävän palauttamiseen löydät [Microsoftin ohjeista](https://support.microsoft.com/en-au/topic/turn-in-an-assignment-in-microsoft-teams-e25f383a-b747-4a0b-b6d5-a2845a52092b) ja tarvittaessa voit kysyä apua Teams-kanavalla. Palauta kaikki tiedostot mieluiten yhtenä zip-pakettina. Jos ratkaisusi koostuu vain yhdestä tiedostosta, ei sitä tarvitse pakata.
+Tehtävä palautetaan kerralla kurssin Teams-ryhmästä löytyvään tehtävään. Ohjeita tehtävän palauttamiseen löydät [Microsoftin ohjeista](https://support.microsoft.com/en-au/topic/turn-in-an-assignment-in-microsoft-teams-e25f383a-b747-4a0b-b6d5-a2845a52092b) ja tarvittaessa voit kysyä apua Teams-kanavalla.
+
+Jos ratkaisusi koostuu vain yhdestä tiedostosta, ei sitä tarvitse pakata, mutta jos palautat useita tiedostoja, tee niistä zip-paketti.
