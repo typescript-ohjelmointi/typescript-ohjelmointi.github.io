@@ -29,7 +29,9 @@ namespace advanced_exercice {
         type: PageTypes;
         description: string;
 
-        // TODO: Add an array of Components here, so that the `mainPage` later on this page will pass type checks.
+        // TODO: Something is missing here, so that the `mainPage` later on this page will pass type checks
+        // Now this doesn't "contain Components" as required.
+        // See the error messages and the other components for hints.
     };
 
     // Define Header, mainSection, Footer components with specific elements.
@@ -69,7 +71,7 @@ namespace advanced_exercice {
 
     // A Subpage is like a page, but a Subpage doesn't have a description and it has a string type parentId referring to the main page it is a subpage of.
 
-    // TODO: add the `parentId` field n the SubPage type:
+    // TODO: add the `parentId` field in the SubPage type:
     type SubPage = Omit<Page, "description"> // ..
 
     // Define a subpage, which contains a main section.
@@ -108,8 +110,8 @@ namespace advanced_exercice {
     // TODO: Define the following type with name "Footer" and accepted element types "Text" and "Img"
     type FooterComponent = BaseComponent<"?", "?">;
 
-    // Advanced: Still create a special type with the help of BaseComponent which can be either a Header or a Footer component.
-    // Extract the correct Element types from the Header and Footer types.
+    // Here we create a special type with the help of BaseComponent which can be either a Header or a Footer component.
+    // We extract the correct Element types from the Header and Footer types.
     type HeaderOrFooterComponent = BaseComponent<
         "Header" | "Footer",
         FooterComponent["elements"][number] | HeaderComponent["elements"][number]
@@ -208,8 +210,6 @@ namespace advanced_exercice {
             description: "Description of the page",
             components: [],
         },
-        configuration: {
-            configIsDone: false,
-        },
+        //TODO: What needs to be added here so that this follows the PageWithGenericConfiguration-Type 
     };
 }
