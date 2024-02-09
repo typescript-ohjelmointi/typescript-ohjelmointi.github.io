@@ -77,7 +77,7 @@ Alisivu eli `SubPage` on muuten kuten yllä määritelty `Page`, mutta alisivull
 
 :::tip
 
-Pyri toteuttamaan `SubPage` hyödyntäen [aputyyppejä](../tyypit/08-utility-types.md) sekä [leikkausta (intersection)](../tyypit/05-unions-intersections.md) siten, että sinun ei tarvitse toistaa tässä kohdassa `Page`-tyyppiin määritettyjä ominaisuuksia.
+Pyri toteuttamaan `SubPage` hyödyntäen [aputyyppejä](../tyypit/08-utility-types.md) sekä [leikkausta (intersection)](../tyypit/05-unions-intersections.md) siten, että sinun ei tarvitse toistaa tässä kohdassa `Page`-tyyppiin määritettyjä ominaisuuksia. Jos tämä ei onnistu, voit myös toteuttaa `SubPage`-tyypin toistamalla `Page`-tyypin määrittelyn ja tehdä suoraan siihen tarvittavat muutokset.
 
 :::
 
@@ -85,7 +85,7 @@ Pyri toteuttamaan `SubPage` hyödyntäen [aputyyppejä](../tyypit/08-utility-typ
 
 Sovelluksesi kehittyessä haluat tukea myös edistyneempiä tyyppejä.
 
-Edistyneempien tyyppien tarkoituksena on mahdollistaa eri komponenteille ja sivuille erilaisia lisätietoja ja toisaalta myös rajoittaa sitä, missä kohdin sivuja eri tyyppisiä sisältöjä voidaan käyttää. Esimerkiksi oheisessa `Header`-tyypissä halutaan sallia vain painikkeita ja kuvia:
+Edistyneempien tyyppien tarkoituksena on mahdollistaa eri komponenteille ja sivuille erilaisia lisätietoja ja toisaalta myös rajoittaa sitä, missä kohdin sivuja eri tyyppisiä sisältöjä voidaan käyttää. Esimerkiksi oheisessa `Header`-komponenttityypissä halutaan sallia vain painikkeita ja kuvia:
 
 ```ts
 type HeaderComponent = BaseComponent<"Header", "Button" | "Img">;
@@ -97,9 +97,9 @@ Täydennä tehtävätiedostoon seuraavaksi `FooterComponent`-tyyppi, jonka nimi 
 type FooterComponent = BaseComponent<"?", "?">;
 ```
 
-:::info
+:::info 🎉 🥳
 
-Tämän `FooterComponent`-tyypin täydentäminen korjaa käännösvirheet myös useista alempana olevista tyypeistä.
+Tämän `FooterComponent`-tyypin täydentäminen korjaa lukuisia virheitä alempana tehtävätiedostossa.
 
 :::
 
@@ -111,7 +111,7 @@ Käännösvirheen ratkaisemiseksi sinun tulee perehtyä `SubPageAdvanced`-tyyppi
 
 :::tip
 
-Viimeisen osan ratkaisemiseksi sinun tarvitsee **poistaa** virheellinen sisältö. Älä siis turhaan muuta virheellistä sisältöä äläkä tyyppimäärityksiä.
+Viimeisen osan ratkaisemiseksi sinun tarvitsee **poistaa** virheellinen sisältö. Älä siis turhaan yritä muuttaa virheellistä sisältöä tai siihen liittyviä tyyppimäärityksiä.
 
 :::
 
