@@ -121,7 +121,6 @@ Viimeisessä vaiheessa on jäljellä enää yksi virhe. Se ratkeaa, kun täydenn
 
 Mikäli sait kaikki vaiheet oikein, `advanced_exercice.ts` kääntyy nyt kokonaan ilman virheitä. Onneksi olkoon!
 
-:::
 
 ## Tehtävän palauttaminen
 
