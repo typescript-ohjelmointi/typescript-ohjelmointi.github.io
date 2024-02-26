@@ -105,13 +105,21 @@ Tämän `FooterComponent`-tyypin täydentäminen korjaa lukuisia virheitä alemp
 
 ## Vaihe 4: `subPageAdvanced`-olion korjaaminen
 
-Viimeisenä vaiheena pyri korjaamaan `subPageAdvanced`-olion määrittelyssä esiintyvä käännösvirhe.
+Pyri korjaamaan `subPageAdvanced`-olion määrittelyssä esiintyvä käännösvirhe.
 
 Käännösvirheen ratkaisemiseksi sinun tulee perehtyä `SubPageAdvanced`-tyyppiin sekä siihen liittyviin kommentteihin. Vain tietyt komponentit ovat tässä tyypissä sallittuja, ja vain tietyssä järjestyksessä.
 
 :::tip
 
-Viimeisen osan ratkaisemiseksi sinun tarvitsee **poistaa** virheellinen sisältö. Älä siis turhaan yritä muuttaa virheellistä sisältöä tai siihen liittyviä tyyppimäärityksiä.
+Osan ratkaisemiseksi sinun tarvitsee **poistaa** virheellinen sisältö. Älä siis turhaan yritä muuttaa virheellistä sisältöä tai siihen liittyviä tyyppimäärityksiä.
+
+:::
+
+## Vaihe 5: `pageWithGenericConfiguration`-olion korjaaminen
+
+Viimeisessä vaiheessa on jäljellä enää yksi virhe. Se ratkeaa, kun täydennät `pageWithGenericConfiguration`-olion `PageWithGenericConfiguration`-tyypin määritelmän mukaiseksi.
+
+Mikäli sait kaikki vaiheet oikein, `advanced_exercice.ts` kääntyy nyt kokonaan ilman virheitä. Onneksi olkoon!
 
 :::
 
